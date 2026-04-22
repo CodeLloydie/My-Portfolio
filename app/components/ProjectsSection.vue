@@ -89,6 +89,10 @@
 </template>
 
 <script setup lang="ts">
+import farmcoImg  from '~/assets/imgs/Farmco-pal.png'
+import whiteLogoImg from '~/assets/imgs/White-Logo.png'
+import gearupImg  from '~/assets/imgs/Screenshot 2026-04-22 083335.png'
+
 const sectionRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
 
@@ -98,7 +102,7 @@ const projects = [
     title:       'Project FarmCo-Pal',
     description: 'A modular SaaS for cooperatives — activate loans, savings, milling, and more on demand. Built-in dynamic bookkeeping lets you assign debit & credit entries to exact accounts, keeping every transaction transparent and fully auditable.',
     tech:        ['Nuxt', 'Laravel', 'MySQL'],
-    image:       useAssetUrl('/imgs/Farmco-pal.png'),
+    image:       farmcoImg,
     liveUrl:     null,
     githubUrl:   null,
     liveLabel:   'In Development',
@@ -107,7 +111,7 @@ const projects = [
     title:       'Project Invent-Story',
     description: 'Inventory that goes beyond stock tracking — it tells your business story. Monitor sales, log transactions, and spot trends through live analytics. The Smart Price Builder lets you test a price before selling: enter your capital and target profit, and the system calculates the perfect selling price instantly.',
     tech:        ['Nuxt', 'Laravel', 'MySQL'],
-    image:       useAssetUrl('/imgs/White-Logo.png'),
+    image:       whiteLogoImg,
     logoOnly:    true,
     liveUrl:     null,
     githubUrl:   null,
@@ -118,7 +122,7 @@ const projects = [
     title: 'Project Gear Up',
     description: 'Shop smarter for PC and electronic parts. Gear Up is a mobile e-commerce app with clean product browsing, smart discovery, and a fast checkout — built for builders, enthusiasts, and everyday shoppers alike.',
     tech:        ['Figma', 'UI/UX Design', 'Prototyping', 'Mobile Design'],
-    image:       useAssetUrl('/imgs/Screenshot 2026-04-22 083335.png'),
+    image:       gearupImg,
     liveUrl:     'https://www.figma.com/design/0viUh2V821olPc3tb9VXsC/Apps-Prototype?node-id=37-79&t=eiJ10YNprXA5jdEX-1',
     githubUrl:   null,
     liveLabel:   'View on Figma →',
