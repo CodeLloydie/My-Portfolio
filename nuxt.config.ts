@@ -3,11 +3,13 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  nitro: { preset: 'github-pages' },
   vite: {
     plugins: [tailwindcss()]
   },
   css: ['~/assets/css/main.css'],
   app: {
+    baseURL: '/My-Portfolio/',
     head: {
       title: 'Marlloyd Honrado — Developer & Designer',
       meta: [
