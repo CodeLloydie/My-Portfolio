@@ -102,7 +102,7 @@
             View Work
           </a>
           <a
-            href="/docs/Marlloyd_Honrado_CV.pdf"
+            :href="useAssetUrl('/docs/Marlloyd_Honrado_CV.pdf')"
             download
             class="px-7 py-3 border border-graphite-600 text-graphite-300 text-sm tracking-widest uppercase hover:border-graphite-300 hover:text-graphite-100 transition-colors duration-200 flex items-center gap-2"
           >
