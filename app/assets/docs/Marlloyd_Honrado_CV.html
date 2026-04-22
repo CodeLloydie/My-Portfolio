@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marlloyd I. Honrado — CV</title>
+  <style>
+    /* ── Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0a;
+      --surface:   #111111;
+      --border:    #242424;
+      --text:      #e2e2e2;
+      --muted:     #6b6b6b;
+      --dim:       #3d3d3d;
+      --accent:    #c4c4c4;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 48px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    /* ── Print button (screen only) ── */
+    .print-btn {
+      display: inline-block;
+      margin-bottom: 40px;
+      padding: 10px 24px;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .print-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Header ── */
+    header { border-bottom: 1px solid var(--border); padding-bottom: 28px; margin-bottom: 36px; }
+    header h1 { font-size: 22px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: #fff; margin-bottom: 4px; }
+    header p.role { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+
+    .contact-row { display: flex; flex-wrap: wrap; gap: 6px 24px; }
+    .contact-row span { font-size: 11px; color: var(--muted); }
+    .contact-row span a { color: var(--muted); text-decoration: none; }
+    .contact-row span a:hover { color: var(--accent); }
+
+    /* ── Sections ── */
+    section { margin-bottom: 36px; }
+    section h2 {
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--dim);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 20px;
+    }
+
+    /* ── About ── */
+    .about p { color: var(--accent); font-size: 12px; line-height: 1.8; }
+
+    /* ── Skills ── */
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .skill-group p.group-label { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--dim); margin-bottom: 10px; }
+    .skill-group ul { list-style: none; }
+    .skill-group ul li { font-size: 12px; color: var(--accent); padding: 2px 0; }
+    .skill-group ul li::before { content: '— '; color: var(--dim); }
+
+    /* ── Experience / Education ── */
+    .entry { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .entry-title { font-size: 13px; font-weight: 500; color: #fff; }
+    .entry-sub   { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .entry-detail{ font-size: 11px; color: var(--dim); margin-top: 6px; grid-column: 1 / -1; line-height: 1.7; }
+    .entry-year  { font-size: 10px; color: var(--dim); letter-spacing: 0.1em; white-space: nowrap; text-align: right; padding-top: 2px; }
+
+    /* ── Projects ── */
+    .project { margin-bottom: 22px; padding-bottom: 22px; border-bottom: 1px solid var(--border); }
+    .project:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .project-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+    .project-header h3 { font-size: 13px; font-weight: 500; color: #fff; }
+    .project-status { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dim); }
+    .project p { font-size: 11px; color: var(--accent); line-height: 1.8; margin-bottom: 8px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag { font-size: 10px; letter-spacing: 0.1em; padding: 2px 8px; border: 1px solid var(--border); color: var(--dim); }
+
+    /* ── Footer ── */
+    footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); text-align: center; }
+    footer p { font-size: 10px; color: var(--dim); letter-spacing: 0.2em; text-transform: uppercase; }
+
+    /* ══════════════════════════════════
+       PRINT STYLES
+    ══════════════════════════════════ */
+    @media print {
+      :root {
+        --bg:      #ffffff;
+        --surface: #f5f5f5;
+        --border:  #dddddd;
+        --text:    #111111;
+        --muted:   #555555;
+        --dim:     #888888;
+        --accent:  #222222;
+      }
+
+      body {
+        background: #fff;
+        color: #111;
+        padding: 0;
+        font-size: 11px;
+      }
+
+      .print-btn { display: none; }
+
+      header h1 { color: #000; }
+
+      a { color: #333 !important; text-decoration: none; }
+
+      section { page-break-inside: avoid; }
+
+      .entry, .project { page-break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="print-btn" onclick="window.print()">⬇ Download / Print CV</button>
+
+  <!-- Header -->
+  <header>
+    <h1>Marlloyd I. Honrado</h1>
+    <p class="role">Web Developer &nbsp;·&nbsp; Graphic Designer &nbsp;·&nbsp; Security Enthusiast</p>
+    <div class="contact-row">
+      <span>@ <a href="mailto:honradomarlloyd@gmail.com">honradomarlloyd@gmail.com</a></span>
+      <span># +63 908 138 1680</span>
+      <span>⌥ <a href="https://github.com/CodeLloydie" target="_blank">github.com/CodeLloydie</a></span>
+      <span>in <a href="https://www.linkedin.com/in/marlloyd-honrado-4245402a0" target="_blank">linkedin.com/in/marlloyd-honrado</a></span>
+      <span>ig <a href="https://www.instagram.com/mihonrado/" target="_blank">@mihonrado</a></span>
+      <span>📍 Philippines</span>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section class="about">
+    <h2>Profile</h2>
+    <p>
+      Web developer and graphic designer with hands-on experience building modular SaaS platforms, UI/UX prototypes, and institutional IT systems. Combines technical development skills with a strong design sensibility — delivering solutions that are both functional and visually purposeful. Currently expanding into ethical hacking and cybersecurity concepts.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section>
+    <h2>Technical Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <p class="group-label">Development</p>
+        <ul>
+          <li>HTML / CSS</li>
+          <li>JavaScript</li>
+          <li>Vue.js</li>
+          <li>Nuxt</li>
+          <li>Laravel</li>
+          <li>MySQL</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="group-label">Design</p>
+        <ul>
+          <li>Figma</li>
+          <li>Adobe Illustrator</li>
+          <li>Adobe Photoshop</li>
+          <li>UI/UX Design</li>
+          <li>Prototyping</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <p class="group-label">Tools</p>
+        <ul>
+          <li>VS Code</li>
+          <li>GitHub</li>
+          <li>Claude Code</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Experience -->
+  <section>
+    <h2>Work Experience</h2>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">Web Developer Intern</p>
+        <p class="entry-sub">AWORK A/S &nbsp;·&nbsp; Denmark (Remote)</p>
+        <p class="entry-detail">Contributed to real-world web development projects in a remote international environment. Gained professional experience working with a Danish company across a 5-month engagement during the final year of college.</p>
+      </div>
+      <p class="entry-year">2025 — 2026</p>
+    </div>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">IT Support</p>
+        <p class="entry-sub">Hulid Elementary School &nbsp;·&nbsp; Philippines</p>
+        <p class="entry-detail">Managed and maintained school IT systems, troubleshot hardware and software issues, and provided ongoing technical support to staff. Ran concurrently with college studies from 1st year onwards.</p>
+      </div>
+      <p class="entry-year">2022 — 2026</p>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section>
+    <h2>Projects</h2>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>FarmCo-Pal</h3>
+        <span class="project-status">In Development</span>
+      </div>
+      <p>Modular SaaS platform for cooperatives — activate loans, savings, milling, and transaction services on demand. Features a dynamic bookkeeping engine for manual debit/credit assignment per account, ensuring full financial transparency.</p>
+      <div class="tags">
+        <span class="tag">Nuxt</span>
+        <span class="tag">Laravel</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Solo Dev</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>Invent-Story</h3>
+        <span class="project-status">In Development</span>
+      </div>
+      <p>SaaS inventory system for SMBs with sales management, transaction logging, and analytical dashboards. Core feature: Smart Price Builder — calculates optimal selling price based on capital and target profit margin.</p>
+      <div class="tags">
+        <span class="tag">Nuxt</span>
+        <span class="tag">Laravel</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">Solo Dev</span>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-header">
+        <h3>Gear Up</h3>
+        <span class="project-status">UI/UX Prototype</span>
+      </div>
+      <p>Mobile e-commerce app prototype for computer and electronic parts. Designed for PC builders, enthusiasts, and everyday shoppers — featuring product browsing, smart discovery, cart, and checkout flows.</p>
+      <div class="tags">
+        <span class="tag">Figma</span>
+        <span class="tag">Mobile Design</span>
+        <span class="tag">Prototyping</span>
+        <span class="tag">UI/UX</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Education -->
+  <section>
+    <h2>Education</h2>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">BS Information Technology</p>
+        <p class="entry-sub">STI College Davao &nbsp;·&nbsp; Davao City, Philippines</p>
+      </div>
+      <p class="entry-year">2022 — 2026</p>
+    </div>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">Senior High School</p>
+        <p class="entry-sub">Davao City National High School &nbsp;·&nbsp; Davao City, Philippines</p>
+      </div>
+      <p class="entry-year">2020 — 2022</p>
+    </div>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">Junior High School</p>
+        <p class="entry-sub">Cateel National High School &nbsp;·&nbsp; Cateel, Davao Oriental</p>
+      </div>
+      <p class="entry-year">2016 — 2020</p>
+    </div>
+
+    <div class="entry">
+      <div>
+        <p class="entry-title">Elementary</p>
+        <p class="entry-sub">Maryknoll Academy of Cateel &nbsp;·&nbsp; Cateel, Davao Oriental</p>
+      </div>
+      <p class="entry-year">2010 — 2016</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>Marlloyd I. Honrado &nbsp;·&nbsp; honradomarlloyd@gmail.com &nbsp;·&nbsp; +63 908 138 1680</p>
+  </footer>
+
+</body>
+</html>
