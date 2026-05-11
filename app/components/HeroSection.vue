@@ -41,7 +41,7 @@
           </a>
           <a
             :href="cvUrl"
-            target="_blank"
+            download="Marlloyd_Honrado_CV.pdf"
             rel="noopener"
             class="px-7 py-3 border border-graphite-600 text-graphite-300 text-sm tracking-widest uppercase hover:border-graphite-300 hover:text-graphite-100 transition-colors duration-200 flex items-center gap-2"
           >
