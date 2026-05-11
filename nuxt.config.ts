@@ -1,5 +1,21 @@
 import tailwindcss from '@tailwindcss/vite'
 
+// Suppress the known-benign "Duplicated imports useAppConfig" Nitro warning.
+// Emitted by Nitro's consola logger during createNitro() init (before Rollup runs),
+// so rollupConfig.onwarn cannot intercept it — we filter at the stream level instead.
+for (const s of ['stdout', 'stderr'] as const) {
+  const orig = process[s].write.bind(process[s])
+  process[s].write = function (chunk: any, ...args: any[]) {
+    const msg: string = typeof chunk === 'string' ? chunk : chunk?.toString?.('utf8') ?? ''
+    if (msg.includes('Duplicated imports') && msg.includes('useAppConfig')) {
+      const cb = args[args.length - 1]
+      if (typeof cb === 'function') cb()
+      return true
+    }
+    return (orig as any)(chunk, ...args)
+  } as typeof process[typeof s]['write']
+}
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -23,20 +39,6 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   hooks: {
-    async 'nitro:init'(nitro) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      nitro.hooks.hook('rollup:before', (n: any) => {
-        for (const cfg of [n.rollupConfig, n.options?.rollupConfig].filter(Boolean)) {
-          const prev = cfg.onwarn
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          cfg.onwarn = (warning: any, warn: any) => {
-            if (warning.message?.includes('useAppConfig')) return
-            if (prev) prev(warning, warn)
-            else warn(warning)
-          }
-        }
-      })
-    },
     'vite:extendConfig'(config) {
       Object.assign(config, {
         build: {
