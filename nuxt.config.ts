@@ -5,12 +5,6 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     preset: 'vercel',
-    rollupConfig: {
-      onwarn(warning, warn) {
-        if (warning.message?.includes('useAppConfig')) return
-        warn(warning)
-      },
-    },
   },
   modules: ['@nuxtjs/i18n'],
   i18n: {
@@ -29,8 +23,30 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   hooks: {
+    'nitro:config'(nitroConfig) {
+      const prev = nitroConfig.rollupConfig?.onwarn
+      nitroConfig.rollupConfig = {
+        ...nitroConfig.rollupConfig,
+        onwarn(warning, warn) {
+          if (warning.message?.includes('useAppConfig')) return
+          prev ? prev.call(this, warning, warn) : warn(warning)
+        },
+      }
+    },
     'vite:extendConfig'(config) {
-      Object.assign(config, { build: { ...config.build, sourcemap: false } })
+      Object.assign(config, {
+        build: {
+          ...config.build,
+          rollupOptions: {
+            ...config.build?.rollupOptions,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            onwarn(warning: any, warn: any) {
+              if (warning.message?.includes('Sourcemap is likely to be incorrect')) return
+              warn(warning)
+            },
+          },
+        },
+      })
     },
   },
   css: ['~/assets/css/main.css'],
