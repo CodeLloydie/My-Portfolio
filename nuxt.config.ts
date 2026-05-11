@@ -23,15 +23,19 @@ export default defineNuxtConfig({
     plugins: [tailwindcss()],
   },
   hooks: {
-    'nitro:config'(nitroConfig) {
-      const prev = nitroConfig.rollupConfig?.onwarn
-      nitroConfig.rollupConfig = {
-        ...nitroConfig.rollupConfig,
-        onwarn(warning, warn) {
-          if (warning.message?.includes('useAppConfig')) return
-          prev ? prev.call(this, warning, warn) : warn(warning)
-        },
-      }
+    async 'nitro:init'(nitro) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      nitro.hooks.hook('rollup:before', (n: any) => {
+        for (const cfg of [n.rollupConfig, n.options?.rollupConfig].filter(Boolean)) {
+          const prev = cfg.onwarn
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          cfg.onwarn = (warning: any, warn: any) => {
+            if (warning.message?.includes('useAppConfig')) return
+            if (prev) prev(warning, warn)
+            else warn(warning)
+          }
+        }
+      })
     },
     'vite:extendConfig'(config) {
       Object.assign(config, {
