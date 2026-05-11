@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     vueI18n: './i18n.config.ts',
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    build: { sourcemap: false },
   },
   css: ['~/assets/css/main.css'],
   app: {
