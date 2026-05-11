@@ -5,90 +5,28 @@
 
     <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-20 py-28">
 
-      <!-- Business Card -->
-      <div class="animate-fade-in" style="animation-delay: 0.2s; opacity: 0;">
-        <div
-          class="business-card relative w-90 sm:w-105 bg-graphite-900 border border-graphite-600 p-10 group hover:border-graphite-400 transition-all duration-500 shadow-2xl cursor-pointer"
-          @click="cardOpen = true"
-          title="Click to open business card"
-        >
-          <span class="corner top-0 left-0 border-t border-l border-graphite-400" />
-          <span class="corner top-0 right-0 border-t border-r border-graphite-400" />
-          <span class="corner bottom-0 left-0 border-b border-l border-graphite-400" />
-          <span class="corner bottom-0 right-0 border-b border-r border-graphite-400" />
-
-          <!-- Profile photo -->
-          <div class="w-28 h-28 border border-graphite-500 mb-8 overflow-hidden">
-            <img src="~/assets/imgs/ME-1.jpg" alt="Marlloyd Honrado" class="w-full h-full object-cover" />
-          </div>
-
-          <h1 class="text-graphite-50 text-2xl font-medium tracking-wider uppercase leading-none mb-2">
-            Marlloyd I. Honrado
-          </h1>
-          <p class="text-graphite-400 text-sm tracking-widest uppercase mb-8">
-            Web Developer &nbsp;/&nbsp; Graphic Designer
-          </p>
-
-          <div class="w-full h-px bg-graphite-700 mb-8" />
-
-          <ul class="space-y-3">
-            <li class="flex items-center gap-4">
-              <span class="text-graphite-500 w-5 text-sm">@</span>
-              <span class="text-graphite-300 text-sm">honradomarlloyd@gmail.com</span>
-            </li>
-            <li class="flex items-center gap-4">
-              <span class="text-graphite-500 w-5 text-sm">#</span>
-              <span class="text-graphite-300 text-sm">+63 908 138 1680</span>
-            </li>
-            <li class="flex items-center gap-4">
-              <span class="text-graphite-500 w-5">
-                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              </span>
-              <span class="text-graphite-300 text-sm">github.com/CodeLloydie</span>
-            </li>
-          </ul>
-
-          <!-- Socials -->
-          <div class="flex items-center gap-5 mt-6">
-            <a v-for="s in socials" :key="s.label" :href="s.href" target="_blank" rel="noopener" :aria-label="s.label"
-              class="text-graphite-500 hover:text-graphite-100 transition-colors duration-200"
-              @click.stop
-            >
-              <component :is="s.icon" class="w-4 h-4" />
-            </a>
-          </div>
-
-          <!-- click hint -->
-          <p class="text-graphite-600 text-xs tracking-widest uppercase mt-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            Click to view full card
-          </p>
-        </div>
-      </div>
-
       <!-- Text block -->
       <div class="max-w-lg text-center lg:text-left">
         <p
           class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5 animate-fade-up"
           style="animation-delay: 0.3s; opacity: 0;"
-        >
-          — Portfolio
-        </p>
+        >{{ t('hero.tagline') }}</p>
 
         <h2
           class="text-graphite-100 text-5xl sm:text-6xl font-light leading-tight tracking-tight mb-8 animate-fade-up"
           style="animation-delay: 0.45s; opacity: 0;"
         >
-          Building things<br />
-          <span class="text-graphite-400">that look</span> good<br />
-          <span class="text-graphite-400">and</span> work right.
+          {{ t('hero.h1_1') }}<br />
+          <span class="text-graphite-400">{{ t('hero.h1_accent1') }}</span> {{ t('hero.h1_2') }}<br />
+          <span class="text-graphite-400">{{ t('hero.h1_accent2') }}</span> {{ t('hero.h1_3') }}
         </h2>
 
         <p
           class="text-graphite-400 text-base leading-relaxed mb-10 animate-fade-up"
           style="animation-delay: 0.6s; opacity: 0;"
         >
-          Web developer in the making. Graphic designer by instinct.<br />
-          Security curious. Based in the Philippines.
+          {{ t('hero.sub1') }}<br />
+          {{ t('hero.sub2') }}
         </p>
 
         <div
@@ -99,7 +37,7 @@
             href="#projects"
             class="px-7 py-3 bg-graphite-100 text-graphite-950 text-sm tracking-widest uppercase font-medium hover:bg-white transition-colors duration-200"
           >
-            View Work
+            {{ t('hero.btn_work') }}
           </a>
           <a
             :href="cvUrl"
@@ -110,15 +48,53 @@
             <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
             </svg>
-            Download CV
+            {{ t('hero.btn_cv') }}
           </a>
         </div>
 
       </div>
+
+      <!-- Business Card -->
+      <div class="animate-fade-in" style="animation-delay: 0.2s; opacity: 0;">
+        <div
+          class="business-card relative w-72 sm:w-80 overflow-hidden border border-graphite-600 group hover:border-graphite-400 transition-all duration-500 shadow-2xl cursor-pointer"
+          style="aspect-ratio: 3/4;"
+          @click="cardOpen = true"
+          title="Click to open business card"
+        >
+          <!-- Corner brackets -->
+          <span class="corner top-0 left-0 border-t border-l border-graphite-400 z-20" />
+          <span class="corner top-0 right-0 border-t border-r border-graphite-400 z-20" />
+          <span class="corner bottom-0 left-0 border-b border-l border-graphite-400 z-20" />
+          <span class="corner bottom-0 right-0 border-b border-r border-graphite-400 z-20" />
+
+          <!-- Full-bleed photo -->
+          <img
+            src="~/assets/imgs/ME-1.jpg"
+            alt="Marlloyd Honrado"
+            class="absolute inset-0 w-full h-full object-cover object-top"
+          />
+
+          <!-- Bottom gradient overlay -->
+          <div class="absolute inset-x-0 bottom-0 h-2/5 z-10" style="background: linear-gradient(to top, rgba(3,11,46,0.92) 0%, transparent 100%)" />
+
+          <!-- Name & role -->
+          <div class="absolute bottom-0 inset-x-0 z-10 px-6 pb-6">
+            <p class="text-white/50 text-[10px] tracking-[0.35em] uppercase mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              {{ t('hero.card_hint') }}
+            </p>
+            <h1 class="text-white text-lg font-bold tracking-wider uppercase leading-tight">
+              {{ t('hero.card_name') }}
+            </h1>
+            <p class="text-white/60 text-xs tracking-[0.3em] uppercase mt-1">{{ t('hero.card_role') }}</p>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in" style="animation-delay: 1.2s; opacity: 0;">
-      <span class="text-graphite-600 text-sm tracking-widest uppercase">Scroll</span>
+      <span class="text-graphite-600 text-sm tracking-widest uppercase">{{ t('hero.scroll') }}</span>
       <span class="w-px h-10 bg-linear-to-b from-graphite-600 to-transparent" />
     </div>
 
@@ -130,9 +106,9 @@
 <script setup lang="ts">
 import { defineComponent, h } from 'vue'
 
+const { t } = useI18n()
 const cardOpen = ref(false)
-const config = useRuntimeConfig()
-const cvUrl = computed(() => config.app.baseURL.replace(/\/$/, '') + '/docs/Marlloyd_Honrado_CV.pdf')
+const cvUrl = '/docs/Marlloyd_Honrado_CV.pdf'
 
 // ── Canvas: connecting nodes + circuit lines ──────────────────────────────────
 const canvasRef = ref<HTMLCanvasElement | null>(null)

@@ -3,13 +3,24 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  nitro: { preset: 'github-pages' },
+  nitro: { preset: 'vercel' },
+  modules: ['@nuxtjs/i18n'],
+  i18n: {
+    restructureDir: false,
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'fil', name: 'Filipino', file: 'fil.json' },
+    ],
+    defaultLocale: 'en',
+    langDir: 'lang/',
+    strategy: 'no_prefix',
+    vueI18n: './i18n.config.ts',
+  },
   vite: {
     plugins: [tailwindcss()]
   },
   css: ['~/assets/css/main.css'],
   app: {
-    baseURL: '/My-Portfolio/',
     head: {
       title: 'Marlloyd Honrado — Developer & Designer',
       meta: [

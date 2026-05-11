@@ -5,8 +5,8 @@
       <!-- Header -->
       <div
         :class="['transition-all duration-700 mb-20', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']">
-        <p class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5">04 — Journey</p>
-        <h2 class="text-graphite-100 text-4xl sm:text-5xl font-light tracking-tight">Road Taken</h2>
+        <p class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5">{{ t('journey.label') }}</p>
+        <h2 class="text-graphite-100 text-4xl sm:text-5xl font-light tracking-tight">{{ t('journey.heading') }}</h2>
       </div>
 
       <!-- Legend -->
@@ -14,11 +14,11 @@
         :class="['flex items-center justify-center gap-10 mb-16 transition-all duration-700', visible ? 'opacity-100' : 'opacity-0']">
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full bg-graphite-300" />
-          <span class="text-graphite-500 text-sm tracking-widest uppercase">Education</span>
+          <span class="text-graphite-500 text-sm tracking-widest uppercase">{{ t('journey.legend_edu') }}</span>
         </div>
         <div class="flex items-center gap-2">
           <span class="w-3 h-3 rounded-full border-2 border-graphite-300" />
-          <span class="text-graphite-500 text-sm tracking-widest uppercase">Experience</span>
+          <span class="text-graphite-500 text-sm tracking-widest uppercase">{{ t('journey.legend_exp') }}</span>
         </div>
       </div>
 
@@ -43,12 +43,23 @@
                     <p class="text-graphite-100 text-base font-medium group-hover:text-white transition-colors">{{
                       item.left.title }}</p>
                     <p class="text-graphite-400 text-sm">{{ item.left.subtitle }}</p>
+                    <span v-if="item.left.strand" class="inline-block mt-1 text-[10px] px-2 py-0.5 rounded-full border border-graphite-700 text-graphite-400 tracking-widest uppercase">
+                      {{ item.left.strand }}
+                    </span>
                   </button>
 
                   <!-- Expanded detail -->
                   <Transition name="expand">
-                    <div v-if="expanded[`${index}-left`]" class="mt-3 border-t border-graphite-700 pt-3">
+                    <div v-if="expanded[`${index}-left`]" class="mt-3 border-t border-graphite-700 pt-3 space-y-2">
                       <p class="text-graphite-500 text-sm leading-relaxed text-right">{{ item.left.detail }}</p>
+                      <template v-if="item.left.role">
+                        <p class="text-graphite-400 text-xs tracking-widest uppercase text-right">{{ item.left.role }}</p>
+                        <ul class="space-y-1">
+                          <li v-for="task in item.left.tasks" :key="task" class="text-graphite-500 text-xs text-right flex items-start justify-end gap-1.5">
+                            <span>{{ task }}</span><span class="text-graphite-300 shrink-0">·</span>
+                          </li>
+                        </ul>
+                      </template>
                     </div>
                   </Transition>
                 </div>
@@ -80,8 +91,16 @@
                   </button>
 
                   <Transition name="expand">
-                    <div v-if="expanded[`${index}-right`]" class="mt-3 border-t border-graphite-700 pt-3">
+                    <div v-if="expanded[`${index}-right`]" class="mt-3 border-t border-graphite-700 pt-3 space-y-2">
                       <p class="text-graphite-500 text-sm leading-relaxed">{{ item.right.detail }}</p>
+                      <template v-if="item.right.role">
+                        <p class="text-graphite-400 text-xs tracking-widest uppercase">{{ item.right.role }}</p>
+                        <ul class="space-y-1">
+                          <li v-for="task in item.right.tasks" :key="task" class="text-graphite-500 text-xs flex items-start gap-1.5">
+                            <span class="text-graphite-300 shrink-0">·</span><span>{{ task }}</span>
+                          </li>
+                        </ul>
+                      </template>
                     </div>
                   </Transition>
                 </div>
@@ -105,6 +124,7 @@
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const sectionRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
 const expanded = ref<Record<string, boolean>>({})
@@ -114,58 +134,68 @@ function toggle(index: number, side: 'left' | 'right') {
   expanded.value[key] = !expanded.value[key]
 }
 
-const timeline = [
+const timeline = computed(() => [
   {
     left: null,
     right: {
       year: '2025 — 2026',
-      title: 'Web Developer Intern',
-      subtitle: 'AWORK A/S · Denmark (Remote)',
-      detail: '5-month internship working remotely with a Danish company, contributing to real-world web development projects and sharpening professional skills in a global environment.',
+      title: t('journey.intern_title'),
+      subtitle: t('journey.intern_sub'),
+      detail: t('journey.intern_detail'),
+      role: t('journey.intern_role'),
+      tasks: [t('journey.intern_task1'), t('journey.intern_task2')],
     }
   },
   {
     left: {
       year: '2022 — 2026',
-      title: 'BS Information Technology',
-      subtitle: 'STI College Davao',
-      detail: 'Pursued a 4-year BSIT degree, building a strong foundation in software development, systems design, networking, and database management. Graduated 2026.',
+      title: t('journey.bsit_title'),
+      subtitle: t('journey.bsit_sub'),
+      detail: t('journey.bsit_detail'),
     },
     right: {
       year: '2022 — 2026',
-      title: 'IT Support',
-      subtitle: 'Hulid Elementary School',
-      detail: '4 years of hands-on IT support starting from 1st year college — managing school systems, troubleshooting hardware and software, and keeping the institution\'s tech running smoothly.',
+      title: t('journey.itsupport_title'),
+      subtitle: t('journey.itsupport_sub'),
+      detail: t('journey.itsupport_detail'),
+      role: t('journey.itsupport_role'),
+      tasks: [
+        t('journey.itsupport_t1'), t('journey.itsupport_t2'),
+        t('journey.itsupport_t3'), t('journey.itsupport_t4'),
+        t('journey.itsupport_t5'), t('journey.itsupport_t6'),
+      ],
     }
   },
   {
     left: {
       year: '2020 — 2022',
-      title: 'Senior High School',
-      subtitle: 'Davao City National High School',
-      detail: 'Completed Senior High School in Davao City, building academic groundwork and sharpening critical thinking before entering college.',
+      title: t('journey.shs_title'),
+      subtitle: t('journey.shs_sub'),
+      strand: t('journey.shs_strand'),
+      detail: t('journey.shs_detail'),
     },
     right: null,
   },
   {
     left: {
       year: '2016 — 2020',
-      title: 'Junior High School',
-      subtitle: 'Cateel National Agricultural High School',
-      detail: 'Completed Junior High School in Cateel, Davao Oriental — the foundational years that sparked curiosity in technology and problem-solving.',
+      title: t('journey.jhs_title'),
+      subtitle: t('journey.jhs_sub'),
+      strand: t('journey.jhs_strand'),
+      detail: t('journey.jhs_detail'),
     },
     right: null,
   },
   {
     left: {
       year: '2010 — 2016',
-      title: 'Elementary',
-      subtitle: 'Maryknoll Academy of Cateel',
-      detail: 'Where the journey began — 6 years at Maryknoll Academy in Cateel, Davao Oriental. The starting point of a long road still being written.',
+      title: t('journey.elem_title'),
+      subtitle: t('journey.elem_sub'),
+      detail: t('journey.elem_detail'),
     },
     right: null,
   },
-]
+])
 
 onMounted(() => {
   const observer = new IntersectionObserver(

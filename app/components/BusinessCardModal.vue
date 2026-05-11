@@ -9,7 +9,7 @@
       <!-- X button -->
       <button
         class="absolute top-6 right-6 z-10 w-10 h-10 flex items-center justify-center border border-graphite-600 text-graphite-400 hover:text-white hover:border-graphite-300 transition-colors duration-200"
-        @click="$emit('update:modelValue', false)" aria-label="Close">
+        @click="$emit('update:modelValue', false)" :aria-label="t('modal.aria_close')">
         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
           <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
@@ -29,11 +29,11 @@
               <!-- Name bottom -->
               <div class="text-center">
                 <p class="text-white/90 text-xl font-medium tracking-[0.2em] uppercase">Marlloyd I. Honrado</p>
-                <p class="text-white/40 text-sm tracking-widest uppercase mt-1">Web Developer · Graphic Designer</p>
+                <p class="text-white/40 text-sm tracking-widest uppercase mt-1">{{ t('modal.role') }}</p>
               </div>
             </div>
             <!-- flip hint -->
-            <span class="absolute bottom-3 right-4 text-white/20 text-xs tracking-widest">click to flip →</span>
+            <span class="absolute bottom-3 right-4 text-white/20 text-xs tracking-widest">{{ t('modal.hint_flip') }}</span>
           </div>
 
           <!-- BACK -->
@@ -48,8 +48,7 @@
                 <div class="flex items-start justify-between">
                   <div class="text-center">
                     <p class="text-white/90 text-xl font-medium tracking-[0.2em] uppercase">Marlloyd I. Honrado</p>
-                    <p class="text-white/40 text-sm tracking-widest uppercase mt-1">Reorganize Chaos using Critical
-                      Thinking</p>
+                    <p class="text-white/40 text-sm tracking-widest uppercase mt-1">{{ t('modal.tagline') }}</p>
                   </div>
                 </div>
 
@@ -71,7 +70,7 @@
       </div>
 
       <!-- Hint text -->
-      <p class="absolute bottom-8 text-graphite-600 text-sm tracking-widest z-10">Click card to flip</p>
+      <p class="absolute bottom-8 text-graphite-600 text-sm tracking-widest z-10">{{ t('modal.hint_click') }}</p>
     </div>
   </Transition>
 </template>
@@ -80,15 +79,16 @@
 defineProps<{ modelValue: boolean }>()
 defineEmits<{ 'update:modelValue': [val: boolean] }>()
 
+const { t } = useI18n()
 const flipped = ref(false)
 
 watch(() => false, () => { flipped.value = false })
 
-const contacts = [
-  { label: 'email', icon: '@', value: 'honradomarlloyd@gmail.com' },
-  { label: 'phone', icon: '#', value: '+63 908 138 1680' },
-  { label: 'github', icon: '⌥', value: 'github.com/CodeLloydie' },
-]
+const contacts = computed(() => [
+  { label: t('modal.lbl_email'), icon: '@', value: 'honradomarlloyd@gmail.com' },
+  { label: t('modal.lbl_phone'), icon: '#', value: '+63 908 138 1680' },
+  { label: t('modal.lbl_github'), icon: '⌥', value: 'github.com/CodeLloydie' },
+])
 
 const socials = [
   { label: 'FB', href: 'https://web.facebook.com/profile.php?id=61584725707398' },

@@ -3,17 +3,30 @@
 @theme {
   --font-family-mono: "JetBrains Mono", monospace;
 
-  --color-graphite-950: #0a0a0a;
-  --color-graphite-900: #111111;
-  --color-graphite-800: #1a1a1a;
-  --color-graphite-700: #242424;
-  --color-graphite-600: #2e2e2e;
-  --color-graphite-500: #3d3d3d;
-  --color-graphite-400: #6b6b6b;
-  --color-graphite-300: #9a9a9a;
-  --color-graphite-200: #c4c4c4;
-  --color-graphite-100: #e2e2e2;
-  --color-graphite-50:  #f2f2f2;
+  /* Named palette — used directly in SkillsSection & NavBar */
+  --color-tea-cookie:     #f5e3c1;
+  --color-sweet-maple:    #dbb18f;
+  --color-toffee-sauce:   #b37521;
+  --color-phil-bronze:    #6e3b0b;
+  --color-indian-peafowl: #0843a6;
+  --color-myst-depths:    #030b2e;
+
+  /*
+   * Graphite tokens remapped for dark/light theming.
+   * These values are the DARK defaults (overridden in :root for light mode).
+   * bg-graphite-950 → deepest bg, text-graphite-100 → primary text, etc.
+   */
+  --color-graphite-950: #030b2e;
+  --color-graphite-900: #071540;
+  --color-graphite-800: #0d1f50;
+  --color-graphite-700: #1a3070;
+  --color-graphite-600: #2a4090;
+  --color-graphite-500: #8a7a60;
+  --color-graphite-400: #dbb18f;
+  --color-graphite-300: #b37521;
+  --color-graphite-200: #dbb18f;
+  --color-graphite-100: #f5e3c1;
+  --color-graphite-50:  #fdf4e3;
 
   --animate-fade-up: fadeUp 0.7s ease forwards;
   --animate-fade-in: fadeIn 0.6s ease forwards;
@@ -33,6 +46,59 @@
   }
 }
 
+/* ── Light mode (default) ─────────────────────────────────────────────── */
+:root {
+  --color-graphite-950: #f5e3c1;
+  --color-graphite-900: #ecdbb0;
+  --color-graphite-800: #dbb18f;
+  --color-graphite-700: #c9a070;
+  --color-graphite-600: #b37521;
+  --color-graphite-500: #9a7040;
+  --color-graphite-400: #6e3b0b;
+  --color-graphite-300: #0843a6;
+  --color-graphite-200: #04256e;
+  --color-graphite-100: #030b2e;
+  --color-graphite-50:  #010818;
+
+  /* Semantic tokens for SkillsSection / NavBar */
+  --bg-primary:   #f5e3c1;
+  --bg-secondary: #ecdbb0;
+  --bg-card:      #fdf4e3;
+  --text-primary: #030b2e;
+  --text-muted:   #6e3b0b;
+  --text-subtle:  #9a7040;
+  --border:       #dbb18f;
+  --accent:       #0843a6;
+  --accent-gold:  #b37521;
+  --nav-bg:       rgba(245,227,193,0.95);
+}
+
+/* ── Dark mode ────────────────────────────────────────────────────────── */
+.dark {
+  --color-graphite-950: #030b2e;
+  --color-graphite-900: #071540;
+  --color-graphite-800: #0d1f50;
+  --color-graphite-700: #1a3070;
+  --color-graphite-600: #2a4090;
+  --color-graphite-500: #8a7a60;
+  --color-graphite-400: #dbb18f;
+  --color-graphite-300: #b37521;
+  --color-graphite-200: #dbb18f;
+  --color-graphite-100: #f5e3c1;
+  --color-graphite-50:  #fdf4e3;
+
+  --bg-primary:   #030b2e;
+  --bg-secondary: #071540;
+  --bg-card:      #0d1f50;
+  --text-primary: #f5e3c1;
+  --text-muted:   #dbb18f;
+  --text-subtle:  #8a7a60;
+  --border:       rgba(8,67,166,0.5);
+  --accent:       #0843a6;
+  --accent-gold:  #b37521;
+  --nav-bg:       rgba(3,11,46,0.95);
+}
+
 html {
   scroll-behavior: smooth;
   font-size: 20px;
@@ -40,4 +106,8 @@ html {
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }

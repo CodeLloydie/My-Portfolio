@@ -20,6 +20,8 @@ logs
 
 # Claude Code
 .claude
+.agents
+skills-lock.json
 
 # Local env files
 .env

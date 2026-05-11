@@ -1,42 +1,51 @@
 <template>
-  <section id="skills" ref="sectionRef" class="py-32 px-8 border-t border-graphite-800 bg-graphite-950">
+  <section id="skills" ref="sectionRef" class="py-32 px-8 border-t" :style="{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-primary)' }">
     <div class="max-w-6xl mx-auto">
 
       <div :class="['transition-all duration-700', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']">
-        <p class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5">02 — Skills</p>
-        <h2 class="text-graphite-100 text-4xl sm:text-5xl font-light tracking-tight mb-20">
-          Tools &amp; Technologies
+        <p class="text-sm tracking-[0.3em] uppercase mb-5" :style="{ color: 'var(--text-subtle)' }">{{ t('skills.label') }}</p>
+        <h2 class="text-4xl sm:text-5xl font-light tracking-tight mb-6" :style="{ color: 'var(--text-primary)' }">
+          {{ t('skills.heading') }}
         </h2>
+        <p class="text-sm mb-16" :style="{ color: 'var(--text-muted)' }">{{ t('skills.sub') }}</p>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-px bg-graphite-800">
+      <!-- Grouped by category -->
+      <div class="space-y-12">
         <div
-          v-for="(category, ci) in categories"
-          :key="category.name"
-          :class="[
-            'bg-graphite-950 p-10 transition-all duration-700 hover:bg-graphite-900',
-            visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
-          ]"
-          :style="{ transitionDelay: visible ? `${ci * 120}ms` : '0ms' }"
+          v-for="(cat, ci) in categories"
+          :key="cat.name"
+          :class="['transition-all duration-700', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']"
+          :style="{ transitionDelay: visible ? `${ci * 100}ms` : '0ms' }"
         >
-          <p class="text-graphite-500 text-sm tracking-[0.25em] uppercase mb-8">{{ category.name }}</p>
-          <ul class="space-y-5">
-            <li
-              v-for="skill in category.skills"
-              :key="skill.name"
-              class="flex items-center justify-between group"
+          <!-- Category heading -->
+          <div class="flex items-center gap-3 mb-5">
+            <span class="w-2.5 h-2.5 rounded-full shrink-0" :style="{ backgroundColor: cat.accent }" />
+            <span class="text-xs tracking-[0.25em] uppercase font-medium" :style="{ color: cat.accent }">{{ cat.name }}</span>
+            <div class="flex-1 h-px" :style="{ backgroundColor: 'var(--border)' }" />
+          </div>
+
+          <!-- LEGO brick grid — max 4 columns -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div
+              v-for="(brick, bi) in cat.items"
+              :key="brick.name"
+              :class="['transition-all duration-700', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']"
+              :style="{ transitionDelay: visible ? `${ci * 100 + bi * 60}ms` : '0ms' }"
             >
-              <span class="text-graphite-300 text-base group-hover:text-graphite-100 transition-colors duration-200">
-                {{ skill.name }}
-              </span>
-              <div class="w-28 h-px bg-graphite-800 relative overflow-hidden">
-                <div
-                  class="absolute inset-y-0 left-0 bg-graphite-300 transition-all duration-1000"
-                  :style="{ width: visible ? skill.level + '%' : '0%', transitionDelay: visible ? `${ci * 120 + 300}ms` : '0ms' }"
-                />
+              <div
+                class="lego-brick rounded-2xl p-4 flex flex-col items-center gap-3 cursor-default select-none transition-transform duration-200 hover:-translate-y-1 hover:scale-105"
+                :style="{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }"
+              >
+                <!-- Icon -->
+                <div class="w-12 h-12 flex items-center justify-center">
+                  <Icon :icon="brick.icon" width="44" height="44" />
+                </div>
+                <!-- Name -->
+                <p class="text-center text-xs font-medium leading-tight" :style="{ color: 'var(--text-primary)' }">{{ brick.name }}</p>
               </div>
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -45,43 +54,85 @@
 </template>
 
 <script setup lang="ts">
+import { Icon } from '@iconify/vue'
+
+const { t } = useI18n()
 const sectionRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
 
-const categories = [
+const categories = computed(() => [
   {
-    name: 'Development',
-    skills: [
-      { name: 'HTML / CSS',  level: 85 },
-      { name: 'JavaScript',  level: 72 },
-      { name: 'Vue.js',      level: 70 },
-      { name: 'Nuxt',        level: 65 },
-      { name: 'Laravel',     level: 60 },
+    name: t('skills.cat_frontend'),
+    accent: '#0843a6',
+    items: [
+      { name: 'Nuxt',         icon: 'logos:nuxt-icon' },
+      { name: 'Vue.js',       icon: 'logos:vue' },
+      { name: 'Tailwind CSS', icon: 'logos:tailwindcss-icon' },
+      { name: 'REST API',     icon: 'mdi:api' },
     ]
   },
   {
-    name: 'Design',
-    skills: [
-      { name: 'Figma',              level: 80 },
-      { name: 'Adobe Illustrator',  level: 75 },
-      { name: 'Adobe Photoshop',    level: 72 },
+    name: t('skills.cat_backend'),
+    accent: '#b37521',
+    items: [
+      { name: 'Node.js', icon: 'logos:nodejs-icon' },
+      { name: 'Laravel', icon: 'logos:laravel' },
+      { name: 'PHP',     icon: 'logos:php' },
+      { name: 'MySQL',   icon: 'logos:mysql-icon' },
     ]
   },
   {
-    name: 'Tools & Other',
-    skills: [
-      { name: 'VS Code',     level: 90 },
-      { name: 'GitHub',      level: 75 },
-      { name: 'Claude Code', level: 70 },
+    name: t('skills.cat_devops'),
+    accent: '#6e3b0b',
+    items: [
+      { name: 'Vercel', icon: 'logos:vercel-icon' },
+      { name: 'Git',    icon: 'logos:git-icon' },
+      { name: 'GitHub', icon: 'mdi:github' },
     ]
-  }
-]
+  },
+  {
+    name: t('skills.cat_ai'),
+    accent: '#6d28d9',
+    items: [
+      { name: 'Claude AI', icon: 'simple-icons:anthropic' },
+      { name: 'ChatGPT',   icon: 'simple-icons:openai' },
+    ]
+  },
+  {
+    name: t('skills.cat_design'),
+    accent: '#0d9488',
+    items: [
+      { name: 'Figma',       icon: 'logos:figma' },
+      { name: 'Photoshop',   icon: 'logos:adobe-photoshop' },
+      { name: 'Illustrator', icon: 'logos:adobe-illustrator' },
+    ]
+  },
+  {
+    name: t('skills.cat_other'),
+    accent: '#6b7280',
+    items: [
+      { name: 'VS Code', icon: 'logos:visual-studio-code' },
+      { name: 'Laragon', icon: 'mdi:server-outline' },
+      { name: 'Herd',    icon: 'ph:leaf-fill' },
+    ]
+  },
+])
 
 onMounted(() => {
   const observer = new IntersectionObserver(
     ([entry]) => { if (entry?.isIntersecting) visible.value = true },
-    { threshold: 0.15 }
+    { threshold: 0.1 }
   )
   if (sectionRef.value) observer.observe(sectionRef.value)
 })
 </script>
+
+<style scoped>
+.lego-brick {
+  border-width: 1px;
+  border-style: solid;
+  box-shadow: 0 4px 0 0 rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
+}
+.lego-brick:hover {
+  box-shadow: 0 6px 0 0 rgba(0,0,0,0.2), 0 2px 8px rgba(0,0,0,0.15);
+}</style>

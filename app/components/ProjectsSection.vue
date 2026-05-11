@@ -3,10 +3,10 @@
     <div class="max-w-6xl mx-auto">
 
       <div :class="['transition-all duration-700', visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8']">
-        <p class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5">03 — Projects</p>
+        <p class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5">{{ t('projects.label') }}</p>
         <div class="flex items-end justify-between mb-20">
-          <h2 class="text-graphite-100 text-4xl sm:text-5xl font-light tracking-tight">Selected Work</h2>
-          <span class="text-graphite-600 text-sm tracking-widest uppercase hidden sm:block">More coming soon</span>
+          <h2 class="text-graphite-100 text-4xl sm:text-5xl font-light tracking-tight">{{ t('projects.heading') }}</h2>
+          <span class="text-graphite-600 text-sm tracking-widest uppercase hidden sm:block">{{ t('projects.coming_soon') }}</span>
         </div>
       </div>
 
@@ -33,15 +33,15 @@
               />
             </template>
             <template v-else>
-              <span class="text-graphite-600 text-sm tracking-widest uppercase">Project Preview</span>
+              <span class="text-graphite-600 text-sm tracking-widest uppercase">{{ t('projects.preview') }}</span>
             </template>
             <div class="absolute inset-0 bg-graphite-950 opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
             <!-- Status badge -->
             <span
-              v-if="project.liveLabel === 'In Development'"
+              v-if="project.liveLabel === 'in_dev'"
               class="absolute top-3 left-3 px-2 py-1 bg-graphite-950/80 border border-graphite-600 text-graphite-400 text-xs tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             >
-              ⬤ In Development
+              ⬤ {{ t('projects.in_dev') }}
             </span>
           </div>
 
@@ -68,7 +68,7 @@
                 rel="noopener"
                 class="text-graphite-400 hover:text-graphite-100 text-sm tracking-widest uppercase transition-colors"
               >
-                {{ project.liveLabel || 'Live →' }}
+                {{ project.liveLabel === 'figma' ? t('projects.btn_figma') : t('projects.btn_live') }}
               </a>
               <a
                 v-if="project.githubUrl"
@@ -77,7 +77,7 @@
                 rel="noopener"
                 class="text-graphite-400 hover:text-graphite-100 text-sm tracking-widest uppercase transition-colors"
               >
-                GitHub →
+                {{ t('projects.btn_github') }}
               </a>
             </div>
           </div>
@@ -93,41 +93,42 @@ import farmcoImg  from '~/assets/imgs/Farmco-pal.png'
 import whiteLogoImg from '~/assets/imgs/White-Logo.png'
 import gearupImg  from '~/assets/imgs/Screenshot 2026-04-22 083335.png'
 
+const { t } = useI18n()
 const sectionRef = ref<HTMLElement | null>(null)
 const visible = ref(false)
 
-const projects = [
+const projects = computed(() => [
   {
     logoOnly:    false,
-    title:       'Project FarmCo-Pal',
-    description: 'A modular SaaS for cooperatives — activate loans, savings, milling, and more on demand. Built-in dynamic bookkeeping lets you assign debit & credit entries to exact accounts, keeping every transaction transparent and fully auditable.',
+    title:       t('projects.farmcopal_title'),
+    description: t('projects.farmcopal_desc'),
     tech:        ['Nuxt', 'Laravel', 'MySQL'],
     image:       farmcoImg,
     liveUrl:     null,
     githubUrl:   null,
-    liveLabel:   'In Development',
+    liveLabel:   'in_dev',
   },
   {
-    title:       'Project Invent-Story',
-    description: 'Inventory that goes beyond stock tracking — it tells your business story. Monitor sales, log transactions, and spot trends through live analytics. The Smart Price Builder lets you test a price before selling: enter your capital and target profit, and the system calculates the perfect selling price instantly.',
+    title:       t('projects.inventstory_title'),
+    description: t('projects.inventstory_desc'),
     tech:        ['Nuxt', 'Laravel', 'MySQL'],
     image:       whiteLogoImg,
     logoOnly:    true,
     liveUrl:     null,
     githubUrl:   null,
-    liveLabel:   'In Development',
+    liveLabel:   'in_dev',
   },
   {
-    logoOnly: false,
-    title: 'Project Gear Up',
-    description: 'Shop smarter for PC and electronic parts. Gear Up is a mobile e-commerce app with clean product browsing, smart discovery, and a fast checkout — built for builders, enthusiasts, and everyday shoppers alike.',
+    logoOnly:    false,
+    title:       t('projects.gearup_title'),
+    description: t('projects.gearup_desc'),
     tech:        ['Figma', 'UI/UX Design', 'Prototyping', 'Mobile Design'],
     image:       gearupImg,
     liveUrl:     'https://www.figma.com/design/0viUh2V821olPc3tb9VXsC/Apps-Prototype?node-id=37-79&t=eiJ10YNprXA5jdEX-1',
     githubUrl:   null,
-    liveLabel:   'View on Figma →',
+    liveLabel:   'figma',
   },
-]
+])
 
 onMounted(() => {
   const observer = new IntersectionObserver(
