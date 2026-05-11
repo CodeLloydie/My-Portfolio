@@ -3,7 +3,15 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  nitro: { preset: 'vercel' },
+  nitro: {
+    preset: 'vercel',
+    rollupConfig: {
+      onwarn(warning, warn) {
+        if (warning.message?.includes('useAppConfig')) return
+        warn(warning)
+      },
+    },
+  },
   modules: ['@nuxtjs/i18n'],
   i18n: {
     restructureDir: false,
@@ -18,7 +26,11 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    build: { sourcemap: false },
+  },
+  hooks: {
+    'vite:extendConfig'(config) {
+      Object.assign(config, { build: { ...config.build, sourcemap: false } })
+    },
   },
   css: ['~/assets/css/main.css'],
   app: {
