@@ -24,16 +24,6 @@
       </ul>
 
       <div class="flex items-center gap-2">
-        <!-- Language toggle -->
-        <button
-          class="px-3 h-8 rounded-full text-xs font-bold tracking-widest border transition-all duration-200"
-          :style="{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-secondary)', color: 'var(--text-primary)' }"
-          :aria-label="locale === 'en' ? 'Switch to Filipino' : 'Switch to English'"
-          @click="switchLocale"
-        >
-          {{ locale === 'en' ? 'FIL' : 'EN' }}
-        </button>
-
         <!-- Dark/Light toggle -->
         <button
           class="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 border"
@@ -83,7 +73,7 @@
 </template>
 
 <script setup lang="ts">
-const { t, locale, setLocale } = useI18n()
+const { t } = useI18n()
 const scrolled = ref(false)
 const menuOpen = ref(false)
 const isDark = inject<Ref<boolean>>('isDark', ref(false))
@@ -95,10 +85,6 @@ const links = computed(() => [
   { href: '#projects',  label: t('nav.projects') },
   { href: '#education', label: t('nav.journey') },
 ])
-
-function switchLocale() {
-  setLocale(locale.value === 'en' ? 'fil' : 'en')
-}
 
 onMounted(() => {
   window.addEventListener('scroll', () => { scrolled.value = window.scrollY > 20 })

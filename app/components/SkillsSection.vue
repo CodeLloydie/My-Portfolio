@@ -103,7 +103,6 @@ const categories = computed(() => [
     accent: '#0d9488',
     items: [
       { name: 'Figma',       icon: 'logos:figma' },
-      { name: 'Photoshop',   icon: 'logos:adobe-photoshop' },
       { name: 'Illustrator', icon: 'logos:adobe-illustrator' },
     ]
   },

@@ -89,9 +89,10 @@
 </template>
 
 <script setup lang="ts">
-import farmcoImg  from '~/assets/imgs/Farmco-pal.png'
-import whiteLogoImg from '~/assets/imgs/White-Logo.png'
-import gearupImg  from '~/assets/imgs/Screenshot 2026-04-22 083335.png'
+import farmcoImg     from '~/assets/imgs/Farmco-pal.png'
+import obiyenImg     from '~/assets/imgs/obiyen.png'
+import citizenoneImg from '~/assets/imgs/citizenone.png'
+import gearupImg     from '~/assets/imgs/Screenshot 2026-04-22 083335.png'
 
 const { t } = useI18n()
 const sectionRef = ref<HTMLElement | null>(null)
@@ -109,14 +110,24 @@ const projects = computed(() => [
     liveLabel:   'in_dev',
   },
   {
-    title:       t('projects.inventstory_title'),
-    description: t('projects.inventstory_desc'),
-    tech:        ['Nuxt', 'Laravel', 'MySQL'],
-    image:       whiteLogoImg,
-    logoOnly:    true,
-    liveUrl:     null,
+    logoOnly:    false,
+    title:       t('projects.obiyen_title'),
+    description: t('projects.obiyen_desc'),
+    tech:        ['Nuxt', 'Laravel', 'MySQL', 'React Native'],
+    image:       obiyenImg,
+    liveUrl:     'https://app.obiyen.com',
     githubUrl:   null,
-    liveLabel:   'in_dev',
+    liveLabel:   'live',
+  },
+  {
+    logoOnly:    false,
+    title:       t('projects.citizenone_title'),
+    description: t('projects.citizenone_desc'),
+    tech:        ['Nuxt', 'Laravel', 'MySQL', 'React Native'],
+    image:       citizenoneImg,
+    liveUrl:     'https://app.citizenone.dk',
+    githubUrl:   null,
+    liveLabel:   'live',
   },
   {
     logoOnly:    false,
