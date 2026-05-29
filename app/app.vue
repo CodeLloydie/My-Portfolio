@@ -7,9 +7,15 @@
 
 <script setup lang="ts">
 import logoImg from '~/assets/imgs/White-Logo.png'
-useHead({ link: [{ rel: 'icon', type: 'image/png', href: logoImg }] })
+useHead({
+  link: [{ rel: 'icon', type: 'image/png', href: logoImg }],
+  script: [{
+    children: `(function(){try{var s=localStorage.getItem('color-scheme');if(s!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})()`,
+    tagPosition: 'head',
+  }],
+})
 
-const isDark = ref(false)
+const isDark = ref(true)
 
 function applyTheme(dark: boolean) {
   document.documentElement.classList.toggle('dark', dark)
@@ -19,7 +25,7 @@ function applyTheme(dark: boolean) {
 
 onMounted(() => {
   const stored = localStorage.getItem('color-scheme')
-  applyTheme(stored === 'dark')
+  applyTheme(stored !== 'light')
 })
 
 provide('isDark', isDark)

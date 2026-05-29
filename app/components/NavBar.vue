@@ -42,6 +42,13 @@
           </svg>
         </button>
 
+        <!-- Hire Me CTA -->
+        <a
+          :href="mailtoHref"
+          class="hidden sm:inline-flex items-center px-5 py-2.5 text-sm tracking-widest uppercase font-medium rounded-full transition-colors duration-200 hover:opacity-80"
+          :style="{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }"
+        >{{ t('nav.hire') }}</a>
+
         <!-- Hamburger -->
         <button
           class="md:hidden flex flex-col gap-1.5 p-1"
@@ -66,6 +73,14 @@
               @click="menuOpen = false"
             >{{ link.label }}</a>
           </li>
+          <li>
+            <a
+              :href="mailtoHref"
+              class="inline-flex items-center px-5 py-2.5 text-sm tracking-widest uppercase font-medium rounded-full transition-colors duration-200 hover:opacity-80"
+              :style="{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }"
+              @click="menuOpen = false"
+            >{{ t('nav.hire') }}</a>
+          </li>
         </ul>
       </div>
     </Transition>
@@ -76,6 +91,7 @@
 const { t } = useI18n()
 const scrolled = ref(false)
 const menuOpen = ref(false)
+const mailtoHref = `mailto:honradomarlloyd@gmail.com?subject=${encodeURIComponent("Let's work together")}`
 const isDark = inject<Ref<boolean>>('isDark', ref(false))
 const toggleDark = inject<() => void>('toggleDark', () => {})
 

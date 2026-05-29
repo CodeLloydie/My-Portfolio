@@ -6,7 +6,8 @@
     "journey": "Journey",
     "aria_light": "Switch to light mode",
     "aria_dark": "Switch to dark mode",
-    "aria_menu": "Toggle menu"
+    "aria_menu": "Toggle menu",
+    "hire": "Hire Me"
   },
   "hero": {
     "tagline": "— Portfolio",
