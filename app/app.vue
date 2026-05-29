@@ -7,10 +7,12 @@
 
 <script setup lang="ts">
 useHead({
+  htmlAttrs: { class: 'dark' },
   link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   script: [{
-    children: `(function(){try{var s=localStorage.getItem('color-scheme');if(s!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})()`,
+    children: `(function(){try{if(localStorage.getItem('color-scheme')==='light')document.documentElement.classList.remove('dark')}catch(e){}})()`,
     tagPosition: 'head',
+    tagPriority: 'critical',
   }],
 })
 
