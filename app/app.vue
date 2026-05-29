@@ -6,9 +6,8 @@
 </template>
 
 <script setup lang="ts">
-import logoImg from '~/assets/imgs/White-Logo.png'
 useHead({
-  link: [{ rel: 'icon', type: 'image/png', href: logoImg }],
+  link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   script: [{
     children: `(function(){try{var s=localStorage.getItem('color-scheme');if(s!=='light')document.documentElement.classList.add('dark')}catch(e){document.documentElement.classList.add('dark')}})()`,
     tagPosition: 'head',
