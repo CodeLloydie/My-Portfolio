@@ -1,5 +1,5 @@
 <template>
-  <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden px-8">
+  <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden px-8 bg-graphite-950">
 
     <canvas ref="canvasRef" class="absolute inset-0 w-full h-full pointer-events-none" />
 
