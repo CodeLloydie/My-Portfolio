@@ -10,7 +10,7 @@
         </div>
       </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-graphite-800">
+      <div class="grid md:grid-cols-2 gap-px bg-graphite-800">
         <div
           v-for="(project, pi) in projects"
           :key="project.title"
