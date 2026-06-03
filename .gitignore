@@ -21,9 +21,13 @@ logs
 # Claude Code
 .claude
 .agents
+.gemini
+.vercel
 skills-lock.json
 
 # Local env files
 .env
 .env.*
 !.env.example
+
+mockups

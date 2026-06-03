@@ -7,16 +7,16 @@
 
 <script setup lang="ts">
 useHead({
-  htmlAttrs: { class: 'dark' },
+  htmlAttrs: { class: '' },
   link: [{ rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
   script: [{
-    children: `(function(){try{if(localStorage.getItem('color-scheme')==='light')document.documentElement.classList.remove('dark')}catch(e){}})()`,
+    children: `(function(){try{if(localStorage.getItem('color-scheme')==='dark')document.documentElement.classList.add('dark')}catch(e){}})()`,
     tagPosition: 'head',
     tagPriority: 'critical',
   }],
 })
 
-const isDark = ref(true)
+const isDark = ref(false)
 
 function applyTheme(dark: boolean) {
   document.documentElement.classList.toggle('dark', dark)
@@ -26,7 +26,7 @@ function applyTheme(dark: boolean) {
 
 onMounted(() => {
   const stored = localStorage.getItem('color-scheme')
-  applyTheme(stored !== 'light')
+  applyTheme(stored === 'dark')
 })
 
 provide('isDark', isDark)

@@ -7,10 +7,10 @@
     "aria_light": "Lumipat sa light mode",
     "aria_dark": "Lumipat sa dark mode",
     "aria_menu": "Buksan ang menu",
-    "hire": "Kunin Ako"
+    "hire": "Kontakin ako"
   },
   "hero": {
-    "tagline": "— Portfolio",
+    "tagline": "RETHINK, REDESIGN, REWORK",
     "h1_1": "Web Developer:",
     "h1_accent1": "Rethinking",
     "h1_2": "Technology",
@@ -64,12 +64,34 @@
     "preview": "Preview ng Proyekto",
     "farmcopal_title": "Proyekto FarmCo-Pal",
     "farmcopal_desc": "Isang modular na SaaS para sa mga kooperatiba — i-activate ang mga pautang, ipon, paggilingan, at marami pa on demand. Ang built-in na dynamic na bookkeeping ay nagbibigay-daan sa iyo na magtakda ng mga debit at credit entry sa eksaktong mga account, na pinapanatiling transparent at ganap na naaayon ang bawat transaksyon.",
+    "farmcopal_tasks": [
+      "Inarkitekto ang backend infrastructure",
+      "Bumuo ng mga frontend user interface",
+      "Nag-implementa ng dynamic bookkeeping module"
+    ],
     "obiyen_title": "Proyekto Obiyen",
     "obiyen_desc": "Isang all-in-one na business suite na katulad ng Zoho — pinagsasama ang CRM, operasyon, at mga pang-araw-araw na kasangkapan sa iisang konektadong plataporma, na may Nuxt web app at React Native mobile client na pinapagana ng Laravel.",
+    "obiyen_tasks": [
+      "Bumuo ng cross-platform na mobile client",
+      "Nag-integrate ng CRM at operations modules",
+      "Nagdisenyo ng database schema"
+    ],
     "citizenone_title": "Proyekto CitizenOne",
     "citizenone_desc": "Isang SaaS platform para sa industriya ng pangangalagang pangkalusugan — pinagsasama ang mga workflow ng pasyente at tagapagbigay ng serbisyo sa iisang ligtas at konektadong sistema sa web (Nuxt) at mobile (React Native), na pinapagana ng Laravel backend.",
+    "citizenone_tasks": [
+      "Bumuo ng dynamic form builder para makalikha ng custom forms ang end-users nang mabilisan",
+      "Nakabuo ng analytics module para i-track ang paglago at engagement ng bawat user",
+      "Nag-implementa ng custom AI integration gamit ang personal API keys",
+      "Bumuo ng sentralisadong global notification system",
+      "Sumuri at nag-ayos ng mga bug na iniulat ng kliyente para sa stability ng production"
+    ],
     "gearup_title": "Proyekto Gear Up",
     "gearup_desc": "Mas matalinong pamimili ng mga PC at electronic na parte. Ang Gear Up ay isang mobile e-commerce app na may malinis na pag-browse ng produkto, matalinong pagdiskubre, at mabilis na checkout — para sa mga builder, mahilig, at ordinaryong mamimili.",
+    "gearup_tasks": [
+      "Nagdisenyo ng malinis at intuitive na UI/UX mockups para sa mobile e-commerce app",
+      "Lumikha ng interactive prototypes upang suriin at pagandahin ang user flows",
+      "Nag-iterate ng mobile wireframes at visual design base sa feedback"
+    ],
     "btn_live": "Live →",
     "btn_figma": "Tingnan sa Figma →",
     "btn_github": "GitHub →"

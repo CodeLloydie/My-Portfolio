@@ -7,10 +7,10 @@
     "aria_light": "Switch to light mode",
     "aria_dark": "Switch to dark mode",
     "aria_menu": "Toggle menu",
-    "hire": "Hire Me"
+    "hire": "Contact me"
   },
   "hero": {
-    "tagline": "— Portfolio",
+    "tagline": "RETHINK, REDESIGN, REWORK",
     "h1_1": "Web Developer:",
     "h1_accent1": "Rethinking",
     "h1_2": "Technology",
@@ -56,20 +56,43 @@
     "cat_design": "Design",
     "cat_other": "Other"
   },
-  "projects": {
+    "projects": {
     "label": "03 — Projects",
     "heading": "Selected Work",
     "coming_soon": "More coming soon",
     "in_dev": "In Development",
     "preview": "Project Preview",
+    "tasks_label": "Tasks & Contributions",
     "farmcopal_title": "Project FarmCo-Pal",
     "farmcopal_desc": "A modular SaaS for cooperatives — activate loans, savings, milling, and more on demand. Built-in dynamic bookkeeping lets you assign debit & credit entries to exact accounts, keeping every transaction transparent and fully auditable.",
+    "farmcopal_tasks": [
+      "Architected backend infrastructure",
+      "Developed frontend user interfaces",
+      "Implemented dynamic bookkeeping module"
+    ],
     "obiyen_title": "Project Obiyen",
     "obiyen_desc": "An all-in-one business suite in the spirit of Zoho — bringing CRM, operations, and everyday productivity tools together in one connected platform, with a Nuxt web app and a React Native mobile client backed by Laravel.",
+    "obiyen_tasks": [
+      "Built cross-platform mobile client",
+      "Integrated CRM and operations modules",
+      "Designed database schema"
+    ],
     "citizenone_title": "Project CitizenOne",
     "citizenone_desc": "A SaaS platform built for the healthcare industry — streamlining patient and provider workflows into one secure, connected system across web (Nuxt) and mobile (React Native), powered by a Laravel backend.",
+    "citizenone_tasks": [
+      "Built a dynamic form builder for end-users to create custom forms on the fly",
+      "Developed an analytics module for tracking individual user growth and engagement",
+      "Implemented custom AI integration via personal API keys",
+      "Built a centralized global notification system",
+      "Diagnosed and resolved client-reported bugs for production stability"
+    ],
     "gearup_title": "Project Gear Up",
     "gearup_desc": "Shop smarter for PC and electronic parts. Gear Up is a mobile e-commerce app with clean product browsing, smart discovery, and a fast checkout — built for builders, enthusiasts, and everyday shoppers alike.",
+    "gearup_tasks": [
+      "Designed clean and intuitive UI/UX mockups for a mobile e-commerce app",
+      "Created interactive prototypes to test and refine user flows",
+      "Iterated on mobile wireframes and visual design based on feedback"
+    ],
     "btn_live": "Live →",
     "btn_figma": "View on Figma →",
     "btn_github": "GitHub →"

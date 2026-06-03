@@ -2,6 +2,7 @@
 
 @theme {
   --font-family-mono: "JetBrains Mono", monospace;
+  --font-family-serif: "Playfair Display", serif;
 
   /* Named palette — used directly in SkillsSection & NavBar */
   --color-tea-cookie:     #f5e3c1;

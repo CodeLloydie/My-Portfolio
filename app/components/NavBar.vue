@@ -55,9 +55,9 @@
           @click="menuOpen = !menuOpen"
           :aria-label="t('nav.aria_menu')"
         >
-          <span :class="['block w-6 h-px transition-all duration-300', menuOpen ? 'rotate-45 translate-y-2' : '']" :style="{ backgroundColor: 'var(--text-muted)' }" />
-          <span :class="['block w-6 h-px transition-all duration-300', menuOpen ? 'opacity-0' : '']" :style="{ backgroundColor: 'var(--text-muted)' }" />
-          <span :class="['block w-6 h-px transition-all duration-300', menuOpen ? '-rotate-45 -translate-y-2' : '']" :style="{ backgroundColor: 'var(--text-muted)' }" />
+          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? 'rotate-45 translate-y-[8px]' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
+          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? 'opacity-0' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
+          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? '-rotate-45 -translate-y-[8px]' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
         </button>
       </div>
     </nav>

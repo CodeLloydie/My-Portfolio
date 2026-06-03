@@ -1,116 +1,202 @@
 <template>
-  <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden px-8 bg-graphite-950">
+  <section id="hero" class="min-h-screen pt-20 pb-12 flex items-center justify-center relative overflow-hidden bg-graphite-950 px-4 sm:px-8 md:px-12 font-serif text-graphite-100">
 
-    <canvas ref="canvasRef" class="absolute inset-0 w-full h-full pointer-events-none" />
+    <!-- Particle Canvas background -->
+    <canvas ref="canvasRef" class="absolute inset-0 w-full h-full pointer-events-none z-0" />
 
-    <div class="relative z-10 w-full max-w-6xl mx-auto flex flex-col lg:flex-row items-center justify-center gap-20 py-28">
+    <!-- Tarot Spread Overlay (Full Screen) -->
+    <Teleport to="body">
+      <div 
+        class="fixed inset-0 bg-graphite-950/90 backdrop-blur-md z-50 transition-all duration-700 ease-out flex items-center justify-center"
+        :class="isSpread ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'"
+        @click="isSpread = false"
+      >
+        <!-- The Spread Cards -->
+        <div class="relative flex items-center justify-center h-[60vh] w-full max-w-5xl mx-auto perspective-[1200px]" v-if="isSpread" @click.stop>
+          
+          <!-- Close Button -->
+          <button @click="isSpread = false" class="absolute -top-16 text-graphite-400 hover:text-white font-mono tracking-widest uppercase text-xs z-50">
+            [ Close Spread ]
+          </button>
 
-      <!-- Text block -->
-      <div class="max-w-lg text-center lg:text-left">
-        <p
-          class="text-graphite-500 text-sm tracking-[0.3em] uppercase mb-5 animate-fade-up"
-          style="animation-delay: 0.3s; opacity: 0;"
-        >{{ t('hero.tagline') }}</p>
-
-        <h2
-          class="text-graphite-100 text-5xl sm:text-6xl font-light leading-tight tracking-tight mb-8 animate-fade-up"
-          style="animation-delay: 0.45s; opacity: 0;"
-        >
-          {{ t('hero.h1_1') }}<br />
-          <span class="text-graphite-400">{{ t('hero.h1_accent1') }}</span> {{ t('hero.h1_2') }}<br />
-          <span class="text-graphite-400">{{ t('hero.h1_accent2') }}</span> {{ t('hero.h1_3') }}
-        </h2>
-
-        <p
-          class="text-graphite-400 text-base leading-relaxed mb-10 animate-fade-up"
-          style="animation-delay: 0.6s; opacity: 0;"
-        >
-          {{ t('hero.sub1') }}<br />
-          {{ t('hero.sub2') }}
-        </p>
-
-        <div
-          class="flex items-center gap-5 justify-center lg:justify-start animate-fade-up"
-          style="animation-delay: 0.75s; opacity: 0;"
-        >
-          <a
-            href="#projects"
-            class="px-7 py-3 bg-graphite-100 text-graphite-950 text-sm tracking-widest uppercase font-medium hover:bg-white transition-colors duration-200"
-          >
-            {{ t('hero.btn_work') }}
-          </a>
-          <a
-            :href="cvUrl"
-            download="Marlloyd_Honrado_CV.pdf"
-            rel="noopener"
-            class="px-7 py-3 border border-graphite-600 text-graphite-300 text-sm tracking-widest uppercase hover:border-graphite-300 hover:text-graphite-100 transition-colors duration-200 flex items-center gap-2"
-          >
-            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-            </svg>
-            {{ t('hero.btn_cv') }}
-          </a>
-        </div>
-
-      </div>
-
-      <!-- Business Card -->
-      <div class="animate-fade-in" style="animation-delay: 0.2s; opacity: 0;">
-        <div
-          class="business-card relative w-72 sm:w-80 overflow-hidden border border-graphite-600 group hover:border-graphite-400 transition-all duration-500 shadow-2xl cursor-pointer"
-          style="aspect-ratio: 3/4;"
-          @click="cardOpen = true"
-          title="Click to open business card"
-        >
-          <!-- Corner brackets -->
-          <span class="corner top-0 left-0 border-t border-l border-graphite-400 z-20" />
-          <span class="corner top-0 right-0 border-t border-r border-graphite-400 z-20" />
-          <span class="corner bottom-0 left-0 border-b border-l border-graphite-400 z-20" />
-          <span class="corner bottom-0 right-0 border-b border-r border-graphite-400 z-20" />
-
-          <!-- Full-bleed photo -->
-          <img
-            src="~/assets/imgs/ME-1.jpg"
-            alt="Marlloyd Honrado"
-            class="absolute inset-0 w-full h-full object-cover object-top"
-          />
-
-          <!-- Bottom gradient overlay -->
-          <div class="absolute inset-x-0 bottom-0 h-2/5 z-10" style="background: linear-gradient(to top, rgba(3,11,46,0.92) 0%, transparent 100%)" />
-
-          <!-- Name & role -->
-          <div class="absolute bottom-0 inset-x-0 z-10 px-6 pb-6">
-            <p class="text-white/50 text-[10px] tracking-[0.35em] uppercase mb-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              {{ t('hero.card_hint') }}
-            </p>
-            <h1 class="text-white text-lg font-bold tracking-wider uppercase leading-tight">
-              {{ t('hero.card_name') }}
-            </h1>
-            <p class="text-white/60 text-xs tracking-[0.3em] uppercase mt-1">{{ t('hero.card_role') }}</p>
+          <!-- Left Card (Top on Mobile) -->
+          <div class="absolute transition-all duration-700 ease-out z-30 -translate-y-48 md:-translate-y-0 md:-translate-x-[110%] lg:-translate-x-[120%] rotate-y-0 scale-[0.65] md:scale-100 opacity-100">
+            <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-500/50 shadow-2xl relative overflow-hidden group rounded-md">
+              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+            </div>
           </div>
+
+          <!-- Right Card (Bottom on Mobile) -->
+          <div class="absolute transition-all duration-700 ease-out z-30 translate-y-48 md:translate-y-0 md:translate-x-[110%] lg:translate-x-[120%] rotate-y-0 scale-[0.65] md:scale-100 opacity-100">
+            <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-500/50 shadow-2xl relative overflow-hidden group rounded-md">
+              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+            </div>
+          </div>
+
+          <!-- Center Card -->
+          <div class="absolute transition-all duration-700 ease-out z-40 translate-x-0 translate-y-0 scale-[0.65] md:scale-100 shadow-[0_0_80px_rgba(219,177,143,0.15)]">
+            <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-400 shadow-2xl relative overflow-hidden rounded-md bg-graphite-950">
+              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+              <!-- Corners -->
+              <span class="corner top-0 left-0 border-t border-l border-graphite-300 z-20" />
+              <span class="corner top-0 right-0 border-t border-r border-graphite-300 z-20" />
+              <span class="corner bottom-0 left-0 border-b border-l border-graphite-300 z-20" />
+              <span class="corner bottom-0 right-0 border-b border-r border-graphite-300 z-20" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </Teleport>
+
+    <!-- Main Dashboard Container -->
+    <div class="relative z-10 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-6 h-auto lg:h-[85vh] min-h-[700px]">
+      
+      <!-- LEFT: Massive Image Container -->
+      <div class="relative w-full h-[60vh] lg:h-full bg-graphite-800 rounded-[3rem] overflow-hidden shadow-2xl border border-graphite-700">
+        <!-- Object position shifted higher to reveal more of the head -->
+        <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-[50%_15%] lg:object-[50%_40%]" />
+        
+        <!-- Bottom Left Data Cutout (Faux) -->
+        <div class="absolute bottom-0 left-0 bg-graphite-950 w-64 h-32 rounded-tr-[3rem] p-8 border-t border-r border-graphite-700 flex flex-col justify-center">
+           <!-- Curved corner fillers (SVG true cutout) -->
+           <svg class="absolute -top-6 left-0 w-6 h-6 text-graphite-950" fill="currentColor" viewBox="0 0 24 24">
+             <path d="M0 24V0c0 13.255 10.745 24 24 24H0z" />
+           </svg>
+           <svg class="absolute bottom-0 -right-6 w-6 h-6 text-graphite-950" fill="currentColor" viewBox="0 0 24 24">
+             <path d="M0 24V0c0 13.255 10.745 24 24 24H0z" />
+           </svg>
+           
+           <div class="flex items-center gap-4">
+             <div class="w-10 h-10 rounded-full bg-graphite-800 border border-graphite-700 flex items-center justify-center text-graphite-400 italic font-bold">i</div>
+             <div>
+               <p class="text-[9px] font-mono tracking-widest uppercase text-graphite-500 mb-0.5">Nickname</p>
+               <p class="text-lg font-bold tracking-widest uppercase text-graphite-100">Lloydie</p>
+             </div>
+           </div>
+        </div>
+
+        <!-- Bottom Right Title Card (Mobile: Icon only) -->
+        <div class="absolute bottom-6 right-6 sm:bottom-8 sm:right-8 bg-graphite-900/85 backdrop-blur-md rounded-full sm:rounded-[2.5rem] p-2 sm:p-8 border border-graphite-600 shadow-2xl w-16 h-16 sm:w-auto sm:h-auto sm:max-w-[320px] flex items-center justify-center sm:block z-20">
+            <h2 class="hidden sm:block text-3xl sm:text-4xl font-bold italic tracking-wider text-graphite-100 mb-1 leading-tight">WEB</h2>
+            <h2 class="hidden sm:block text-2xl sm:text-3xl font-bold italic tracking-wider text-graphite-400 leading-tight">DEVELOPER</h2>
+            
+            <div class="hidden sm:flex items-center justify-between mt-6 pt-5 border-t border-graphite-700/60">
+               <span class="text-[10px] font-mono tracking-widest text-graphite-500">#DESIGN</span>
+               <span class="text-[10px] font-mono tracking-widest text-graphite-500">#SECURITY</span>
+            </div>
+            
+            <!-- Magic Interaction Button (Redirect to projects) -->
+            <a href="#projects" class="sm:absolute sm:-left-6 sm:bottom-10 w-12 h-12 bg-graphite-300 rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(219,177,143,0.4)] hover:scale-110 hover:bg-graphite-100 transition-all cursor-pointer">
+              <svg class="w-5 h-5 text-graphite-950" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </a>
         </div>
       </div>
 
-    </div>
+      <!-- RIGHT: Sidebar Container -->
+      <div class="w-full h-full flex flex-col gap-6">
+        
+        <!-- Top: Download CV Button -->
+        <a href="/docs/Marlloyd_Honrado_CV.pdf" download="Marlloyd_Honrado_CV.pdf" target="_blank" class="bg-graphite-900 hover:bg-graphite-800 transition-colors rounded-[2.5rem] p-7 border border-graphite-700 shadow-xl flex items-center justify-between group cursor-pointer">
+           <div class="flex flex-col">
+             <h3 class="text-[11px] font-mono tracking-widest text-graphite-500 uppercase mb-1">Resume</h3>
+             <span class="text-xl sm:text-2xl font-bold tracking-widest text-graphite-100 group-hover:text-[#dbb18f] transition-colors">DOWNLOAD CV</span>
+           </div>
+           <div class="w-12 h-12 rounded-full border border-graphite-600 flex items-center justify-center group-hover:border-[#dbb18f] group-hover:bg-[#dbb18f]/10 transition-all shrink-0">
+             <svg class="w-5 h-5 text-graphite-400 group-hover:text-[#dbb18f] transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+             </svg>
+           </div>
+        </a>
 
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in" style="animation-delay: 1.2s; opacity: 0;">
-      <span class="text-graphite-600 text-sm tracking-widest uppercase">{{ t('hero.scroll') }}</span>
-      <span class="w-px h-10 bg-linear-to-b from-graphite-600 to-transparent" />
-    </div>
+        <!-- Middle: Radar Chart (Skills) -->
+        <div class="bg-graphite-900 rounded-[2.5rem] p-7 border border-graphite-700 shadow-xl flex-1 flex flex-col relative overflow-hidden min-h-[250px]">
+           <div class="flex items-center justify-between mb-4 z-10">
+              <h3 class="text-[11px] font-mono tracking-widest text-graphite-500 uppercase">Skills Web</h3>
+              <span class="w-2 h-2 rounded-full bg-graphite-300 animate-pulse shadow-[0_0_10px_rgba(219,177,143,0.8)]"></span>
+           </div>
+           
+           <div class="flex-1 w-full flex items-center justify-center relative z-10 -mt-2">
+              <svg viewBox="0 0 200 200" class="w-full max-w-[220px] h-full overflow-visible drop-shadow-[0_0_15px_rgba(219,177,143,0.15)]">
+                 <!-- Background Hexagons (Web) -->
+                 <polygon points="100,15 174,58 174,142 100,185 26,142 26,58" fill="none" stroke="#2a4090" stroke-width="1" stroke-dasharray="2,2"/>
+                 <polygon points="100,43 149,72 149,128 100,157 51,128 51,72" fill="none" stroke="#2a4090" stroke-width="1" stroke-dasharray="2,2"/>
+                 <polygon points="100,72 124,86 124,114 100,128 76,114 76,86" fill="none" stroke="#2a4090" stroke-width="1" stroke-dasharray="2,2"/>
+                 
+                 <!-- Axes -->
+                 <line x1="100" y1="100" x2="100" y2="15" stroke="#2a4090" stroke-width="1"/>
+                 <line x1="100" y1="100" x2="174" y2="58" stroke="#2a4090" stroke-width="1"/>
+                 <line x1="100" y1="100" x2="174" y2="142" stroke="#2a4090" stroke-width="1"/>
+                 <line x1="100" y1="100" x2="100" y2="185" stroke="#2a4090" stroke-width="1"/>
+                 <line x1="100" y1="100" x2="26" y2="142" stroke="#2a4090" stroke-width="1"/>
+                 <line x1="100" y1="100" x2="26" y2="58" stroke="#2a4090" stroke-width="1"/>
 
+                 <!-- Data Polygon (The Chart) -->
+                 <polygon points="100,37 139,78 147,127 100,172 38,136 46,69" fill="rgba(219, 177, 143, 0.25)" stroke="#dbb18f" stroke-width="2"/>
+                 <!-- Data Nodes -->
+                 <circle cx="100" cy="37" r="3" fill="#dbb18f"/>
+                 <circle cx="139" cy="78" r="3" fill="#dbb18f"/>
+                 <circle cx="147" cy="127" r="3" fill="#dbb18f"/>
+                 <circle cx="100" cy="172" r="3" fill="#dbb18f"/>
+                 <circle cx="38" cy="136" r="3" fill="#dbb18f"/>
+                 <circle cx="46" cy="69" r="3" fill="#dbb18f"/>
+                 
+                 <!-- Labels -->
+                 <text x="100" y="5" text-anchor="middle" class="text-[9px] font-mono fill-graphite-400">Frontend</text>
+                 <text x="182" y="58" text-anchor="start" alignment-baseline="middle" class="text-[9px] font-mono fill-graphite-400">Backend</text>
+                 <text x="182" y="142" text-anchor="start" alignment-baseline="middle" class="text-[9px] font-mono fill-graphite-400">Database</text>
+                 <text x="100" y="198" text-anchor="middle" class="text-[9px] font-mono fill-graphite-400">UI/UX</text>
+                 <text x="18" y="142" text-anchor="end" alignment-baseline="middle" class="text-[9px] font-mono fill-graphite-400">Design</text>
+                 <text x="18" y="58" text-anchor="end" alignment-baseline="middle" class="text-[9px] font-mono fill-graphite-400">Security</text>
+              </svg>
+           </div>
+        </div>
+
+        <!-- Bottom: Years Active & Tarot Deck -->
+        <div class="flex gap-6 h-56">
+           <!-- Projects Shipped -->
+           <div class="bg-graphite-900 rounded-[2.5rem] p-7 border border-graphite-700 shadow-xl flex-1 flex flex-col items-center justify-center relative text-center">
+               <h3 class="text-[11px] font-mono tracking-widest text-graphite-500 uppercase absolute top-6">Projects Shipped</h3>
+               <p class="text-4xl font-bold tracking-widest leading-none text-graphite-100">3</p>
+               <p class="text-[10px] font-mono tracking-widest text-graphite-400 mt-2">Completed</p>
+           </div>
+
+           <!-- Mini Tarot Deck -->
+           <div 
+             class="bg-graphite-900 rounded-[2.5rem] p-5 border border-graphite-700 shadow-xl w-36 flex flex-col items-center justify-center cursor-pointer hover:bg-graphite-800 transition-colors group relative overflow-hidden"
+             @click="isSpread = true"
+           >
+              <h3 class="text-[11px] font-mono tracking-widest text-graphite-500 uppercase absolute top-6">Media</h3>
+              
+              <!-- Miniature Deck -->
+              <div class="relative w-[70px] h-[100px] mt-6 perspective-[600px] group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300">
+                  <div class="absolute inset-0 bg-graphite-800 border border-graphite-600 rounded-sm -rotate-12 -translate-x-3 shadow-md">
+                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
+                  </div>
+                  <div class="absolute inset-0 bg-graphite-800 border border-graphite-600 rounded-sm rotate-12 translate-x-3 shadow-md">
+                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
+                  </div>
+                  <div class="absolute inset-0 bg-graphite-950 border border-graphite-300 rounded-sm shadow-xl">
+                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm" />
+                  </div>
+              </div>
+           </div>
+        </div>
+
+      </div>
+    </div>
   </section>
-
-  <BusinessCardModal v-model="cardOpen" />
 </template>
 
 <script setup lang="ts">
-import { defineComponent, h } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 
 const { t } = useI18n()
-const cardOpen = ref(false)
-const cvUrl = '/docs/Marlloyd_Honrado_CV.pdf'
+const isSpread = ref(false)
 
-// ── Canvas: connecting nodes + circuit lines ──────────────────────────────────
+// ── Canvas: Geometric Golden Ratio Grid ──────────────────────────────────
 const canvasRef = ref<HTMLCanvasElement | null>(null)
 
 onMounted(() => {
@@ -118,135 +204,90 @@ onMounted(() => {
   if (!canvas) return
   const ctx = canvas.getContext('2d')!
 
-  let W = 0, H = 0, raf = 0
-
-  type Node = { x: number; y: number; vx: number; vy: number; r: number }
-  const COUNT = 38
-  const MAX_DIST = 220
-  const nodes: Node[] = []
+  let W = 0, H = 0
 
   function resize() {
     W = canvas!.width  = canvas!.offsetWidth
     H = canvas!.height = canvas!.offsetHeight
+    draw()
   }
 
-  function init() {
-    nodes.length = 0
-
-    // 1 giant hub node — starts near center, drifts slowly
-    nodes.push({
-      x:  W * 0.5,
-      y:  H * 0.5,
-      vx: (Math.random() - 0.5) * 0.15,
-      vy: (Math.random() - 0.5) * 0.15,
-      r:  28,
-    })
-
-    // rest are small/medium satellites
-    for (let i = 1; i < COUNT; i++) {
-      const rand = Math.random()
-      const r = rand < 0.15 ? 6 + Math.random() * 4   // medium
-              : 2 + Math.random() * 2.5                // small
-      nodes.push({
-        x:  Math.random() * W,
-        y:  Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r,
-      })
-    }
-  }
-
-  function tick() {
+  function draw() {
     ctx.clearRect(0, 0, W, H)
 
-    for (const n of nodes) {
-      n.x += n.vx
-      n.y += n.vy
-      if (n.x < 0 || n.x > W) n.vx *= -1
-      if (n.y < 0 || n.y > H) n.vy *= -1
+    const strokeGrid = 'rgba(219, 177, 143, 0.03)'
+    const strokeMain = 'rgba(219, 177, 143, 0.08)'
+    const strokeHighlight = 'rgba(219, 177, 143, 0.15)'
+
+    // Draw basic grid
+    const gridSize = 100
+    ctx.strokeStyle = strokeGrid
+    ctx.lineWidth = 1
+    ctx.beginPath()
+    for (let x = (W / 2) % gridSize; x < W; x += gridSize) {
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, H)
     }
-
-    // Lines between nearby nodes
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const ni = nodes[i]!, nj = nodes[j]!
-        const dx = ni.x - nj.x
-        const dy = ni.y - nj.y
-        const dist = Math.sqrt(dx * dx + dy * dy)
-        if (dist < MAX_DIST) {
-          const alpha = (1 - dist / MAX_DIST) * 0.35
-          ctx.beginPath()
-          ctx.moveTo(ni.x, ni.y)
-          ctx.lineTo(nj.x, nj.y)
-          ctx.strokeStyle = `rgba(180,180,180,${alpha})`
-          ctx.lineWidth = 0.8
-          ctx.stroke()
-        }
-      }
+    for (let y = (H / 2) % gridSize; y < H; y += gridSize) {
+      ctx.moveTo(0, y)
+      ctx.lineTo(W, y)
     }
+    ctx.stroke()
 
-    // Nodes — filled circles, varying radius
-    for (let i = 0; i < nodes.length; i++) {
-      const n = nodes[i]!
-      ctx.beginPath()
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2)
-      ctx.fillStyle = `rgba(180,180,180,${i === 0 ? 0.45 : n.r > 4 ? 0.28 : 0.22})`
-      ctx.fill()
+    // Draw Rule of Thirds
+    ctx.strokeStyle = strokeMain
+    ctx.setLineDash([4, 6])
+    ctx.beginPath()
+    ctx.moveTo(W / 3, 0)
+    ctx.lineTo(W / 3, H)
+    ctx.moveTo(W * 2 / 3, 0)
+    ctx.lineTo(W * 2 / 3, H)
+    ctx.moveTo(0, H / 3)
+    ctx.lineTo(W, H / 3)
+    ctx.moveTo(0, H * 2 / 3)
+    ctx.lineTo(W, H * 2 / 3)
+    ctx.stroke()
+    ctx.setLineDash([])
 
-      // outer ring on giant node only
-      if (i === 0) {
+    // Draw Golden Ratio lines
+    const phi = 0.61803398875
+    ctx.strokeStyle = strokeHighlight
+    ctx.beginPath()
+    ctx.moveTo(W * phi, 0)
+    ctx.lineTo(W * phi, H)
+    ctx.moveTo(W * (1 - phi), 0)
+    ctx.lineTo(W * (1 - phi), H)
+    ctx.moveTo(0, H * phi)
+    ctx.lineTo(W, H * phi)
+    ctx.moveTo(0, H * (1 - phi))
+    ctx.lineTo(W, H * (1 - phi))
+    ctx.stroke()
+
+    // Draw crosshairs at key intersections
+    const xs = [W * phi, W * (1 - phi), W / 3, W * 2 / 3, W / 2]
+    const ys = [H * phi, H * (1 - phi), H / 3, H * 2 / 3, H / 2]
+    
+    ctx.strokeStyle = strokeHighlight
+    ctx.lineWidth = 1.5
+    for (const x of xs) {
+      for (const y of ys) {
         ctx.beginPath()
-        ctx.arc(n.x, n.y, n.r + 6, 0, Math.PI * 2)
-        ctx.strokeStyle = 'rgba(180,180,180,0.12)'
-        ctx.lineWidth = 1.5
+        ctx.moveTo(x - 8, y)
+        ctx.lineTo(x + 8, y)
+        ctx.moveTo(x, y - 8)
+        ctx.lineTo(x, y + 8)
         ctx.stroke()
       }
     }
-
-    raf = requestAnimationFrame(tick)
   }
 
   resize()
-  init()
-  tick()
 
-  const ro = new ResizeObserver(() => { resize(); init() })
+  const ro = new ResizeObserver(() => { resize() })
   ro.observe(canvas)
 
-  onUnmounted(() => { cancelAnimationFrame(raf); ro.disconnect() })
+  onUnmounted(() => { ro.disconnect() })
 })
-
-const IconFacebook = defineComponent({
-  render: () => h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
-    h('path', { d: 'M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z' })
-  ])
-})
-
-const IconLinkedIn = defineComponent({
-  render: () => h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
-    h('path', { d: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z' })
-  ])
-})
-
-const IconInstagram = defineComponent({
-  render: () => h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
-    h('path', { d: 'M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z' })
-  ])
-})
-
-const IconGitHub = defineComponent({
-  render: () => h('svg', { fill: 'currentColor', viewBox: '0 0 24 24' }, [
-    h('path', { d: 'M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z' })
-  ])
-})
-
-const socials = [
-  { label: 'Facebook',  href: 'https://web.facebook.com/profile.php?id=61584725707398', icon: IconFacebook },
-  { label: 'LinkedIn',  href: 'https://www.linkedin.com/in/marlloyd-honrado-4245402a0',  icon: IconLinkedIn },
-  { label: 'Instagram', href: 'https://www.instagram.com/mihonrado/',                     icon: IconInstagram },
-  { label: 'GitHub',    href: 'https://github.com/CodeLloydie',                           icon: IconGitHub },
-]
 </script>
 
 <style scoped>
@@ -256,10 +297,15 @@ const socials = [
   height: 12px;
 }
 .business-card {
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  aspect-ratio: 3/4;
 }
-.business-card:hover {
-  transform: translateY(-4px) rotate(0.5deg);
-  box-shadow: 0 32px 64px rgba(0,0,0,0.6);
+.perspective-\[1200px\] {
+  perspective: 1200px;
+}
+.perspective-\[600px\] {
+  perspective: 600px;
+}
+.rotate-y-0 {
+  transform: rotateY(0deg);
 }
 </style>
