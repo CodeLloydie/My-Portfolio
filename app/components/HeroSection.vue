@@ -22,21 +22,21 @@
           <!-- Left Card (Top on Mobile) -->
           <div class="absolute transition-all duration-700 ease-out z-30 -translate-y-48 md:-translate-y-0 md:-translate-x-[110%] lg:-translate-x-[120%] rotate-y-0 scale-[0.65] md:scale-100 opacity-100">
             <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-500/50 shadow-2xl relative overflow-hidden group rounded-md">
-              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+              <img src="/imgs/30ab7534-9aad-499c-aa46-127113330844.jpeg" class="absolute inset-0 w-full h-full object-cover object-center" />
             </div>
           </div>
 
           <!-- Right Card (Bottom on Mobile) -->
           <div class="absolute transition-all duration-700 ease-out z-30 translate-y-48 md:translate-y-0 md:translate-x-[110%] lg:translate-x-[120%] rotate-y-0 scale-[0.65] md:scale-100 opacity-100">
             <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-500/50 shadow-2xl relative overflow-hidden group rounded-md">
-              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+              <img src="/imgs/c212020d-be79-45c2-a838-083aa18097db.jpeg" class="absolute inset-0 w-full h-full object-cover object-center" />
             </div>
           </div>
 
           <!-- Center Card -->
           <div class="absolute transition-all duration-700 ease-out z-40 translate-x-0 translate-y-0 scale-[0.65] md:scale-100 shadow-[0_0_80px_rgba(219,177,143,0.15)]">
             <div class="business-card w-48 sm:w-64 md:w-80 border border-graphite-400 shadow-2xl relative overflow-hidden rounded-md bg-graphite-950">
-              <img src="~/assets/imgs/ME-1.jpg" class="absolute inset-0 w-full h-full object-cover object-center" />
+              <img src="/imgs/e81ec7f2-f4c2-48cf-8973-6f0e2b54db6c.jpeg" class="absolute inset-0 w-full h-full object-cover object-center" />
               <!-- Corners -->
               <span class="corner top-0 left-0 border-t border-l border-graphite-300 z-20" />
               <span class="corner top-0 right-0 border-t border-r border-graphite-300 z-20" />
@@ -173,13 +173,13 @@
               <!-- Miniature Deck -->
               <div class="relative w-[70px] h-[100px] mt-6 perspective-[600px] group-hover:scale-110 group-hover:-translate-y-2 transition-all duration-300">
                   <div class="absolute inset-0 bg-graphite-800 border border-graphite-600 rounded-sm -rotate-12 -translate-x-3 shadow-md">
-                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
+                     <img src="/imgs/30ab7534-9aad-499c-aa46-127113330844.jpeg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
                   </div>
                   <div class="absolute inset-0 bg-graphite-800 border border-graphite-600 rounded-sm rotate-12 translate-x-3 shadow-md">
-                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
+                     <img src="/imgs/c212020d-be79-45c2-a838-083aa18097db.jpeg" class="w-full h-full object-cover rounded-sm opacity-40 grayscale group-hover:grayscale-0 transition-all" />
                   </div>
                   <div class="absolute inset-0 bg-graphite-950 border border-graphite-300 rounded-sm shadow-xl">
-                     <img src="~/assets/imgs/ME-1.jpg" class="w-full h-full object-cover rounded-sm" />
+                     <img src="/imgs/e81ec7f2-f4c2-48cf-8973-6f0e2b54db6c.jpeg" class="w-full h-full object-cover rounded-sm" />
                   </div>
               </div>
            </div>
