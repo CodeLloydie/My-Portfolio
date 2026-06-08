@@ -33,7 +33,7 @@
       </div>
 
       <!-- Detective Board Container -->
-      <div class="relative w-full mt-10 md:mt-20 min-h-[800px]" ref="containerRef">
+      <div class="relative w-full mt-10 md:mt-20 min-h-200" ref="containerRef">
         
         <!-- SVG Connections (The Red String) -->
         <svg class="absolute inset-0 w-full h-full pointer-events-none z-0" style="overflow: visible;">
@@ -67,7 +67,7 @@
               'transition-all duration-1000 relative z-10', 
               getCardClasses(index),
               visible ? 'opacity-100 scale-100' : 'opacity-0 scale-95',
-              expanded[item.id] ? '!z-30' : ''
+              expanded[item.id] ? 'z-30!' : ''
             ]"
             :style="{ transitionDelay: visible ? `${index * 150}ms` : '0ms' }">
             

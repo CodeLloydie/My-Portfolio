@@ -22,6 +22,11 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel',
   },
+  runtimeConfig: {
+    public: {
+      web3formsKey: process.env.NUXT_PUBLIC_WEB3FORMS_KEY || '',
+    },
+  },
   modules: ['@nuxtjs/i18n'],
   i18n: {
     restructureDir: false,

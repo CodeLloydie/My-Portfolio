@@ -132,6 +132,23 @@
     "elem_sub": "Maryknoll Academy ng Cateel",
     "elem_detail": "Dito nagsimula ang paglalakbay — 6 na taon sa Maryknoll Academy sa Cateel, Davao Oriental. Ang simula ng isang mahabang daan na patuloy na isinusulat."
   },
+  "contact": {
+    "label": "05 — Makipag-ugnayan",
+    "h2_1": "Makipagtulungan",
+    "h2_2": "natin.",
+    "sub": "May proyektong nasa isip, tanong, o gusto lang kumusta? Mag-iwan ng mensahe at babalik ako sa iyo.",
+    "name": "Pangalan",
+    "name_placeholder": "Ang iyong pangalan",
+    "email": "Email",
+    "email_placeholder": "Ilagay ang iyong email",
+    "message": "Mensahe",
+    "message_placeholder": "Sabihin sa akin ang iyong proyekto...",
+    "send": "Ipadala ang mensahe",
+    "sending": "Nagpapadala...",
+    "sent": "Naipadala!",
+    "success": "Naipadala ang mensahe — makikipag-ugnayan ako sa iyo sa lalong madaling panahon.",
+    "error": "May nangyaring mali. Subukan muli o direktang mag-email sa akin."
+  },
   "footer": {
     "name": "Marlloyd I. Honrado"
   },

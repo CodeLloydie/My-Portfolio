@@ -7,6 +7,7 @@
       <SkillsSection />
       <ProjectsSection />
       <EducationSection />
+      <ContactSection />
     </main>
     <FooterSection />
   </div>

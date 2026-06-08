@@ -44,7 +44,7 @@
 
         <!-- Hire Me CTA -->
         <a
-          :href="mailtoHref"
+          href="#contact"
           class="hidden sm:inline-flex items-center px-5 py-2.5 text-sm tracking-widest uppercase font-medium rounded-full transition-colors duration-200 hover:opacity-80"
           :style="{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }"
         >{{ t('nav.hire') }}</a>
@@ -55,9 +55,9 @@
           @click="menuOpen = !menuOpen"
           :aria-label="t('nav.aria_menu')"
         >
-          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? 'rotate-45 translate-y-[8px]' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
-          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? 'opacity-0' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
-          <span :class="['block w-6 h-[2px] transition-all duration-300 rounded-full', menuOpen ? '-rotate-45 -translate-y-[8px]' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
+          <span :class="['block w-6 h-0.5 transition-all duration-300 rounded-full', menuOpen ? 'rotate-45 translate-y-2' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
+          <span :class="['block w-6 h-0.5 transition-all duration-300 rounded-full', menuOpen ? 'opacity-0' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
+          <span :class="['block w-6 h-0.5 transition-all duration-300 rounded-full', menuOpen ? '-rotate-45 -translate-y-2' : '']" :style="{ backgroundColor: 'var(--text-primary)' }" />
         </button>
       </div>
     </nav>
@@ -75,7 +75,7 @@
           </li>
           <li>
             <a
-              :href="mailtoHref"
+              href="#contact"
               class="inline-flex items-center px-5 py-2.5 text-sm tracking-widest uppercase font-medium rounded-full transition-colors duration-200 hover:opacity-80"
               :style="{ backgroundColor: 'var(--text-primary)', color: 'var(--bg-primary)' }"
               @click="menuOpen = false"
@@ -91,7 +91,6 @@
 const { t } = useI18n()
 const scrolled = ref(false)
 const menuOpen = ref(false)
-const mailtoHref = `mailto:honradomarlloyd@gmail.com?subject=${encodeURIComponent("Let's work together")}`
 const isDark = inject<Ref<boolean>>('isDark', ref(false))
 const toggleDark = inject<() => void>('toggleDark', () => {})
 

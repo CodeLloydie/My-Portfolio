@@ -44,9 +44,9 @@
           
           <!-- Folder Body -->
           <div 
-            class="w-full bg-kraft shadow-[0_-5px_15px_rgba(0,0,0,0.2),0_15px_30px_rgba(0,0,0,0.5)] relative z-10 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
+            class="w-full bg-kraft shadow-[0_-5px_15px_rgba(0,0,0,0.2),0_15px_30px_rgba(0,0,0,0.5)] relative z-10 transition-all duration-500 ease-in-out"
             :class="[
-              activeProject === pi ? 'min-h-[600px] rounded-xl pb-12' : 'h-24 rounded-xl cursor-pointer hover:brightness-105'
+              activeProject === pi ? 'min-h-150 rounded-xl pb-12' : 'h-24 rounded-xl cursor-pointer hover:brightness-105'
             ]"
             :style="{
               borderTopLeftRadius: ((pi % 4) * 23) === 0 ? '0' : '0.75rem',

@@ -133,6 +133,23 @@
     "elem_sub": "Maryknoll Academy of Cateel",
     "elem_detail": "Where the journey began — 6 years at Maryknoll Academy in Cateel, Davao Oriental. The starting point of a long road still being written."
   },
+  "contact": {
+    "label": "05 — Contact",
+    "h2_1": "Let's work",
+    "h2_2": "together.",
+    "sub": "Have a project in mind, a question, or just want to say hi? Drop me a message and I'll get back to you.",
+    "name": "Name",
+    "name_placeholder": "Your name",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "message": "Message",
+    "message_placeholder": "Tell me about your project...",
+    "send": "Send message",
+    "sending": "Sending...",
+    "sent": "Sent!",
+    "success": "Message sent — I'll be in touch soon.",
+    "error": "Something went wrong. Try again or email me directly."
+  },
   "footer": {
     "name": "Marlloyd I. Honrado"
   },
